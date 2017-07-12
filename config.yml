@@ -3,6 +3,6 @@ development:
   theme_id: "175613013"
   store: maui-sons.myshopify.com
 production:
-  password: 8d0b95ff8cc047497907e1f32f8a0d70
+  password: 1e60e8367bc4bd5f5136a0d94d74ff96
   theme_id: "174999701"
   store: maui-sons.myshopify.com
