@@ -1,0 +1,29 @@
+
+    <header id="header" class="awe-menubar-header header-style-4">
+        <nav class="awemenu-nav" data-responsive-width="1455" data-style="awemenu-left" data-position="left" data-mobile-position="outleft">
+            <div class="container-fluild">
+                <div class="awemenu-container">
+
+                    <div class="logo-large">
+                        {% include "logo" %}
+                    </div>
+
+                    <div class="logo-small">
+                        <div class="awe-logo">
+                            <a href="/" title="">{{'small_logo.png' | asset_url | img_tag }}</a>
+                        </div><!-- /.awe-logo -->
+                    </div>
+
+                    <ul class="awemenu">
+                        {% include "navbar-menu4" %}
+                    </ul><!-- /.awemenu -->
+
+                    <div class="navbar-footer">
+                        {% include "navbar-icon" %}
+                        {% include "search" %}
+                    </div>
+                </div>
+            </div><!-- /.container -->
+
+        </nav><!-- /.awe-menubar -->
+    </header><!-- /.awe-menubar-header -->

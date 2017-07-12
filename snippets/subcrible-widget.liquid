@@ -1,0 +1,27 @@
+{%assign newletter_title= settings.newletter_title %}
+{%assign newletter_des= settings.newletter_des %}
+{%assign newletter_button= settings.newletter_button %}
+{%assign newletter_input= settings.newletter_input %}
+<div class="widget">
+  <h3 class="widget-title">{{newletter_title}}</h3>
+
+  <div class="widget-content">
+
+    <div class="subscrible-form-row">
+      <p>{{newletter_des}}</p>
+
+      <form action="index.html" method="GET">
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="subscribe-email" class="sr-only">{{'subscible.email'|t}}</label>
+            <input type="email" id="subscribe-email" class="form-control" placeholder="{{newletter_input}}">
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn btn-lg">{{newletter_button}}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div><!-- /.widget -->

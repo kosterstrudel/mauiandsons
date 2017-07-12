@@ -1,0 +1,38 @@
+<li class="dropdown dropup currency-picker__wrapper">
+<span class="select-title">{{'general.language.title'|t}}:</span>
+              <a data-target="#" href="#" data-toggle="dropdown" role="button">{{settings.language_default}}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+              <ul class="dropdown-menu">
+             {%for i in (1..6)%}
+                      {%capture _enable%}language{{i}}_enable{%endcapture%}
+                        {%capture _text%}language{{i}}_text{%endcapture%}
+                        {%capture _url%}Language{{i}}_url{%endcapture%}
+
+                        {%assign enable = settings[_enable]%}
+                        {%assign text = settings[_text]%}
+                      {%assign url = settings[_url]%}
+                {%if enable%}
+                <li><a href="{{url}}" title="{{text}}">{{text}}</a></li>
+                {%endif%}
+              {% endfor %}
+
+              </ul>
+</li>
+<li class="dropdown dropup currency-picker__wrapper">
+  <span class="select-title">{{'general.currency.title'|t}}:</span>
+  <div class="price-select">
+    
+
+    <select class="currency-picker" name="currencies" style="display: inline; width: auto; vertical-align: inherit;">
+      {% assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK' | split: ',' %}
+      {% assign supported_codes = settings.supported_currencies | split: ' ' %}
+      <option value="{{ shop.currency }}" selected="selected">{{ shop.currency }}</option>
+      {% for code in supported_codes %}
+      {% if code != shop.currency and codes contains code %}
+      <option value="{{ code }}">{{ code }}</option>
+      {% endif %}
+      {% endfor %}
+    </select>
+
+  </div>
+
+</li>

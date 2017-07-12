@@ -1,0 +1,56 @@
+<div class="hidden">
+  {{collection.tags}}
+</div>
+{% paginate collection.products by 24 %}
+<div class="main-header background background-image-heading-{{ page.heading }}" style="background-image: url({{'heading-products.jpg' | asset_url }})">
+  <div class="container">
+    <h1>{{ collection.title }}</h1>
+  </div>
+</div>
+
+{% include "breadcrumb" %}
+
+{%capture style %}sidebar_style{%endcapture%}
+
+<div class="container">
+  <div class="row">
+    <div class="{%if settings[style] =="no"%}col-md-12{%else%} col-md-9 {%if settings[style] =="left"%}col-md-push-3 {%endif%}{%endif%}">
+
+      {% include "product-filters" %}   
+      <div id="collection-products">
+        <div class="collection-grid">
+          <div class="products-grid ">
+            {% include "products-list" %}
+          </div>
+        </div>
+        <div class="padding">
+          {% if paginate.pages > 1 %}
+          {%include 'pagination'%}
+          {% endif %}
+        </div>
+      </div>
+    </div><!-- /.col-* -->
+    {%if settings[style] =="no"%}{%else%}
+    <div class="col-md-3 {%if settings[style] =="left"%}col-md-pull-9 {%endif%} collection-sidebar">
+      <div id="shop-widgets-filters" class="shop-widgets-filters ">
+        {% include "collection-sidebar" %}
+      </div>
+
+      <div id="open-filters">
+        <i class="fa fa-filter"></i>
+        <span>{{'collections.filter'|t}}</span>
+      </div>
+    </div><!-- /.col-* -->
+    {%endif%}
+  </div><!-- /.row -->
+</div><!-- /.container -->
+{% endpaginate %}
+<script>
+  {%if settings[style] =="no"%}{%else%}
+  $(function() { aweProductSidebar(); });
+  {%endif%}
+
+</script>
+
+
+

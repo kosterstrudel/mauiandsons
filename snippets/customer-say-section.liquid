@@ -1,0 +1,71 @@
+
+
+<div class="container">
+  <div class="divider"></div>
+</div>
+<section class="background-image-section-customers-say " >
+  {% capture title %}testimonial_title{% endcapture %}
+  {% capture background %}testimonial_img.jpg{% endcapture %}
+  <div class="container">
+    <div class="padding-top-40 padding-bottom-60">
+      <div class="section-header center">
+        <h2>{{settings[title]}}</h2>
+      </div><!-- /.section-header -->
+
+      <div class="section-customers " >
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="owl-carousel" id="customers-carousel" data-toggle="carousel" data-dots="true" data-nav="0">
+              {% for i in (1..8) %}
+              {% capture enable %}testimonial_{{ i }}{% endcapture %}
+              {% capture des %}testimonial_des_{{ i }}{% endcapture %}
+              {% capture name %}testimonial_name_{{ i }}{% endcapture %}
+			  {% capture img %}testimonial_img_{{ i }}{% endcapture %}
+
+              {% if settings[enable] %} 
+              <div class="row">
+                <div class="col-md-2 col-sm-2 ">
+                  {{ img | asset_url | img_tag }}
+                </div>
+                <div class="col-md-10  col-sm-10">
+                
+                <p>“{{settings[des]}}“</p>
+                  <h4 class="left upper">{{settings[name]}}</h4>
+                </div>
+              </div><!-- /.center -->
+
+              {% endif %}
+              {% endfor %}
+
+            </div><!-- /.customers-say-carousel -->
+          </div>
+        </div>
+      </div><!-- /.section-content -->
+    </div>
+  </div><!-- /.container -->
+  {%if settings.show_brand%}
+  <div class="section-brands">
+    <div class="container">
+      <div class="brands-carousel owl-carousel" id="brands-carousel">
+        {% for i in (1..10) %}
+        {% capture _enable %}home_brand_carousel_enable_{{ i }}{% endcapture %}
+        {% capture _icon %}home_brand_logo_{{ i }}.png{% endcapture %}
+        {% capture _url %}home_brand_carousel_url_{{ i }}{% endcapture %}   
+        {% assign enable = settings[_enable] %}
+
+
+        {% if enable %}
+        {% assign url = settings[_url] %}
+
+
+        <div class="center">
+          <a class="{{url}}" href="{{url}}" title="">{{ _icon | asset_url | img_tag }}</a> 
+        </div><!-- /.center -->
+        {% endif %}
+        {% endfor %}
+      </div><!-- /.brands-carousel -->
+    </div><!-- /.container -->
+  </div><!-- /.section-brands -->
+  {%endif%}
+
+</section><!-- /section -->

@@ -1,0 +1,21 @@
+
+<!-- // LOADING -->
+<div class="awe-page-loading">
+  <div class="awe-loading-wrapper">
+    <div class="awe-loading-icon">
+      {%if settings.loading-icon%}
+      <span class="icon">
+      <img src="{{'loading-icon.png'| asset_url}}" alt=""?/>
+      </span>
+      {%else%}
+      <span class="icon icon-logo"></span>
+      {%endif%}
+      
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </div>
+</div>
+<!-- // END LOADING -->

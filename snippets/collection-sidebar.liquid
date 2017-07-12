@@ -1,0 +1,13 @@
+<div class="filter-block">
+  {%for i in (1..11)%}
+{%capture sidebar_section%}sidebar_block_{{i}}{%endcapture%}
+{% if settings[sidebar_section] != blank %}
+{% include settings[sidebar_section]} %}
+
+{% endif %}
+{%endfor%}
+
+</div>
+
+
+

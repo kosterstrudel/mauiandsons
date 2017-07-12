@@ -1,0 +1,13 @@
+{%assign logo.png = settings.logo.png %}
+{%if settings.svg_logo %}
+<div class="awe-logo retinal">
+  <a href="/" title="logo"> 
+    {{settings.svg_logo_text}}
+  </a>
+</div><!-- /.awe-logo -->
+{%else%}
+<div class="awe-logo">
+  <a href="/" title="logo"> 
+    {{'logo.png' | asset_url | img_tag }}</a>
+</div><!-- /.awe-logo -->
+{%endif%}

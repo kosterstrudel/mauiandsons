@@ -1,0 +1,11 @@
+{% assign about = settings.about_title %}
+{% assign about_content = settings.about_content %}
+{%if about != ""%}
+<div class="widget">
+  <h3 class="widget-title">{{about}}</h3>
+
+  <div class="widget-content">
+    <p>{{about_content}}</p>
+  </div>
+</div>
+{%endif%}

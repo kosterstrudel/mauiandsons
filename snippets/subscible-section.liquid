@@ -1,0 +1,43 @@
+
+
+<section>
+  <div class="subscible-wrapper subscible-inline margin-bottom-50" style=" background-image: url({{'newletter_img.jpg'|asset_url}})">
+  <div class="container">
+    <div class="">
+      
+        {%assign newletter_title= settings.newletter_title %}
+        {%assign newletter_des= settings.newletter_des %}
+        {%assign newletter_button= settings.newletter_button %}
+        {%assign newletter_input= settings.newletter_input %}
+        {% if settings.newsletter_form_action != blank %}
+        {% assign form_action = settings.newsletter_form_action %}
+        {% else %}
+        {% assign form_action = '#' %}
+        {% endif %}
+        <div class="row">
+          <div class="col-md-5 col-sm-4 margin-top-30">
+            <p class="subscribe-title margin-left-40">{{newletter_title}}</p>
+            <h2 class="margin-left-40 margin-top-10">{{newletter_des}}</h2>
+          </div>
+
+          <div class="col-md-7 col-sm-7 margin-top-40">
+
+            
+            <form action="{{ form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank"  class="subscible-form">
+              <div class="form-group">
+                <label class="sr-only" for="subscribe-email">{{'subscible.email'|t}}</label>
+                <input  class="form-control" type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{newletter_input}}" name="EMAIL" id="mail" autocorrect="off" autocapitalize="off">
+                
+              </div>
+              
+              <div class="form-submit">
+                <input type="submit" class="btn btn-lg btn-primary"  name="subscribe" id="subscribe" value="{{newletter_button}}">
+              </div>
+             
+            </form>
+          </div>
+        </div>
+      </div><!-- /.subscible-wrapper -->
+    </div>
+  </div><!-- /.container -->
+</section><!-- /section -->

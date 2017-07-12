@@ -1,0 +1,18 @@
+<div id="widget-area" class="widget-area">
+  {%if settings.show_blog_sidebar_category%}
+  {% include "categoryes-widget" %}
+  {%endif%}
+  {%if settings.show_blog_sidebar_recent_post%}
+  {% include "recent-posts-widget" %}
+   {%endif%}
+  {%if settings.show_blog_sidebar_tag%}
+  {% include "blog-tag-widget" %}
+   {%endif%}
+  {%if settings.show_blog_sidebar_social%}
+  {% include "socials-widget" %}
+   {%endif%}
+  {%if settings.show_blog_sidebar_ads%}
+  {% include "ads-widget" %}
+   {%endif%}
+  
+</div>

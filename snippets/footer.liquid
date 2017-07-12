@@ -1,0 +1,129 @@
+{% assign col-1-title-1 = settings.footer_column_1_title_1 %}
+{% assign col-1-title-2 = settings.footer_column_1_title_2 %}
+{% assign col-2-title = settings.footer_column_2_title %}
+{% assign col-3-title = settings.footer_column_3_title %}
+{% assign col-4-title-1 = settings.footer_column_1_title_1 %}
+{% assign col-4-title-2 = settings.footer_column_1_title_2 %}
+
+{% assign col-1-content-1 = settings.footer_column_1_content_1 %}
+{% assign col-1-content-2 = settings.footer_column_1_content_2 %}
+{% assign col-2-content = settings.footer_column_2_content %}
+{% assign col-3-content = settings.footer_column_3_content %}
+{% assign col-4-content-1 = settings.footer_column_4_content_1 %}
+{% assign col-4-content-2 = settings.footer_column_4_content_2 %}
+
+{% assign coppyright = settings.footer_coppyright %}
+{% assign footer_menu = settings.footer_menu %}
+{% assign footer_style = settings.footer_style%}
+
+ {%if settings.contact_map and settings.footer_style == "style5"%}
+    <div class="contact-map" id="contact-map"  data-lat="{{settings.contact_map_1}}" data-lng="{{settings.contact_map_2}}">
+      <!-- // -->
+    </div><!-- /.contact-map -->
+    {%endif%}
+<footer class="footer {%if settings.header_style == "style5"%}fix-header-style5{%endif%}">
+  <div class="footer-wrapper {%if settings.header_style == "style4"%}footerv3{%endif%}">
+    <div class="footer-widgets">
+
+      {% if footer_style =="style1" %}
+      {% include "footer-style1" %}
+      {% endif %}
+
+      {% if footer_style =="style2" %}
+      {% include "footer-style4" %}
+      {% endif %}
+      {% if footer_style =="style3" %}
+      {% include "footer-style2" %}
+      {% endif %}
+      {% if footer_style =="style4" %}
+      {% include "footer-style3" %}
+      {% endif %}
+      {% if footer_style =="style5" %}
+      {% include "footer-style5" %}
+      {% endif %}
+
+    </div><!-- /.footer-widgets -->
+
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="copyright">
+          <p>{{ coppyright }}</p>
+        </div>
+
+        <div class="footer-nav">
+          <nav>
+            <ul>
+              {% for link in linklists[footer_menu].links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>   
+              {% endfor %}
+
+            </ul>
+          </nav>
+
+          <nav>
+            <ul>
+              {%if settings.show_multiple_currencies%}
+
+              {% include 'currency-picker' %}
+              {%endif%}
+
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div><!-- /.footer-copyright -->
+  </div><!-- /.footer-wrapper -->
+{% if footer_style !="style4" %}
+  <a href="#" class="back-top {% if settings.footer_style =="style5" %}footer-v5{%endif%}" title="">
+    {%if settings.backtop-svg%}
+    <span class="back-top-image backtop-retinal">    
+      {{settings.svg_backtop_text}}                
+    </span>
+    {%else%}
+    <span class="back-top-image">               
+      <img src="{{ 'back-top.png' | asset_url }}" alt="">
+    </span>
+    {%endif%}
+	{% if footer_style !="style5" %}
+    <small>{{'layout.footer.back_to_top'|t}}</small>
+    {%endif%}
+  </a><!-- /.back-top -->
+  {%else%}
+  <a href="#" class="back-top button" title="">
+    <i class="fa fa-angle-up margin-top-10"></i>
+  </a><!-- /.back-top -->
+ {% endif %}
+</footer><!-- /footer -->
+
+
+
+{%if settings.contact_map and settings.footer_style == "style5"%}
+  <script type="text/javascript">
+
+    $(function() {
+      aweMaps();
+
+      $('#contact-form').on('submit', function() {
+        var $form = $(this);
+        var data = $(this).serialize();
+
+        $.ajax({
+          url: 'contact.php',
+          type: 'POST',
+          data: data,
+        })
+        .done(function(res) {
+          if (res && ! $(res).hasClass('failure')) {
+            $form.find('input, textarea').val('');
+          }
+        })
+        .always(function(res) {
+          $('#ajax-message').html(res);
+        });
+
+        return false;
+      });
+    });
+
+  </script>
+  {%endif%}

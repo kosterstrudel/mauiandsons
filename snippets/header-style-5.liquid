@@ -1,0 +1,68 @@
+    <header id="header" class="awe-menubar-header header-style-5">
+      <div class="br-board engoc-topbar topbar">
+          <div class="container"> 
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12 hidden-xs">
+              <ul class="topbar-text left">
+				{%if settings.topbar_phone != blank %}
+                  <li><i class="fa fa-phone" aria-hidden="true"></i>{{settings.topbar_phone}}</li>
+                {%endif%}
+                {%if settings.topbar_mail != blank %}
+                <li><i class="fa fa-envelope-o" aria-hidden="true"></i>{{settings.topbar_mail}}</li>
+                {%endif%}
+              </ul>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+
+              <ul class="br-dropdown right">
+                <li class="dropdown text-uppercase">
+
+              <a data-target="#" href="#" data-toggle="dropdown" role="button">{{settings.language_default}}</a>
+              <ul class="dropdown-menu">
+             {%for i in (1..6)%}
+                      {%capture _enable%}language{{i}}_enable{%endcapture%}
+                        {%capture _text%}language{{i}}_text{%endcapture%}
+                        {%capture _url%}Language{{i}}_url{%endcapture%}
+
+                        {%assign enable = settings[_enable]%}
+                        {%assign text = settings[_text]%}
+                      {%assign url = settings[_url]%}
+                {%if enable%}
+                <li><a href="{{url}}" title="{{text}}">{{text}}</a></li>
+                {%endif%}
+              {% endfor %}
+
+              </ul>
+            </li>
+            <li class="dropdown text-uppercase">
+
+              <a data-target="#" href="#" data-toggle="dropdown" role="button" class="selected-currency">{{shop.currency}}</a>
+                <ul class="dropdown-menu" id="currencies">
+                  {% assign supported = settings.supported_currencies | split: ' ' %}
+                  {% for c in supported %}
+                  <li><a data-currency="{{c}}">{{c}}</a></li>
+                  {% endfor %}
+                </ul>
+              </li>
+              </ul>
+            </div>
+            </div>
+          </div>
+        </div>
+        <nav class="awemenu-nav" data-responsive-width="1200">
+            <div class="container">
+                <div class="awemenu-container">
+                    <div class="navbar-header">
+                        {% include "navbar-icon" %}
+                        {% include "search" %}
+                    </div>
+                    {% include "logo" %}
+
+                    <ul class="awemenu awemenu-right">
+                        {% include "navbar-menu" %}
+                    </ul><!-- /.awemenu -->
+                </div>
+            </div><!-- /.container -->
+
+        </nav><!-- /.awe-menubar -->
+    </header><!-- /.awe-menubar-header -->

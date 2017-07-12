@@ -1,0 +1,32 @@
+{% if template contains 'article' or template contains 'blog' %}
+{% capture permalinkURL %}{{ shop.url }}{{ article.url }}{% endcapture %}
+{% capture shareTitle %}{{ article.title | url_param_escape }}{% endcapture %}
+{% elsif template contains 'product' %}
+{% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}
+{% capture shareTitle %}{{ product.title | url_param_escape }}{% endcapture %}
+{% elsif template == 'password' %}
+{% capture permalinkURL %}{{ shop.url }}{% endcapture %}
+{% capture shareTitle %}{% unless shop.description == blank %}{{ shop.description | url_param_escape }}{% else %}{{ shop.name | url_param_escape }}{% endunless %}{% endcapture %}
+{% endif %}
+
+{% comment %}
+Share button styles are:
+* is-clean
+* normal
+{% endcomment %}
+{% assign shareButtonStyle = 'is-clean' %}
+{% if settings.share_twitter %}
+<li><a  href="//twitter.com/share?text={{ shareTitle }}&amp;url={{ permalinkURL }}" data-toggle="tooltip" title="Twitter"><i class="icon icon-twitter"></i></a></li>
+{% endif %}
+{% if settings.share_facebook %}  
+<li><a href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" data-toggle="tooltip" title="Facebook"><i class="icon icon-facebook"></i></a></li>
+{% endif %}
+
+{% if settings.share_google %}  
+<li><a  href="//plus.google.com/share?url={{ permalinkURL }}" data-toggle="tooltip" title="Google+"><i class="icon icon-google-plus"></i></a></li>
+{% endif %}
+{% if settings.share_pinterest %}
+{% if product.featured_image or article.image %}
+<li><a  href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media=http:{% if template contains 'product' %}{{ product | img_url: '1024x1024' }}{% else %}{{ article | img_url: '1024x1024' }}{% endif %}&amp;description={{ shareTitle }}" data-toggle="tooltip" title="Pinterest"><i class="icon icon-pinterest"></i></a></li>
+{% endif %}
+{% endif %}

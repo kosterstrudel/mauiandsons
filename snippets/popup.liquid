@@ -1,0 +1,91 @@
+{%assign newletter_title= settings.popup_newletter_title %}
+{%assign newletter_des= settings.popup_newletter_des %}
+{%assign newletter_des2= settings.popup_newletter_des2 %}
+{%assign newletter_button= settings.popup_newletter_button_title %}
+{%assign newletter_input= settings.popup_newletter_input_title %}
+{% if settings.newsletter_form_action != blank %}
+{% assign form_action = settings.newsletter_form_action %}
+{% else %}
+{% assign form_action = '//myshopify.us12.list-manage.com/subscribe/post?u=9ade7b39da179308b891bd263&amp;id=e9dbec7f92' %}
+{% endif %}
+
+<div class="newsletterwrapper">
+  <div id="email-modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-window">
+      <div class="window-window">
+        <div class="window-content clearfix">
+          <a class="btn close" title="Close"><span class="icon icon-remove"></span></a>
+          <div class="left">
+            <h1 class="title">{{newletter_title}}</h1>           
+            <p class="sub-title">{{newletter_des}}</p>
+            <div id="mailchimp-email-subscibe ">
+              <div id="mc_embed_signup">
+                <form action="{{ form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank"  class="subscible-form row">
+                  <div class="col-sm-6 form-group inline-block">
+
+                    <input  class="form-control" type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{newletter_input}}" name="EMAIL" id="mail" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
+
+                  </div>
+
+                  <div class="col-sm-4 form-submit inline-block">
+                    <input type="submit" class="btn btn-lg btn-primary"  name="subscribe" id="subscribe" value="{{newletter_button}}">
+                  </div>
+
+                </form>
+              </div>
+            </div>
+            <h2 class="message">{{newletter_des2}}</h2>
+            {%if settings.show_popup_newletter_social%}
+            <div class="product-socials">
+              <ul class="list-socials">
+
+                {% if settings.share_twitter %}
+                <li><a  href="{{settings.block_twitter_url}}" data-toggle="tooltip" title="Twitter"><i class="icon icon-twitter"></i></a></li>
+                {% endif %}
+                {% if settings.share_facebook %}  
+                <li><a href="{{settings.block_facebook_url}}" data-toggle="tooltip" title="Facebook"><i class="icon icon-facebook"></i></a></li>
+                {% endif %}
+
+                {% if settings.share_google %}  
+                <li><a  href="{{settings.block_google_url}}" data-toggle="tooltip" title="Google+"><i class="icon icon-google-plus"></i></a></li>
+                {% endif %}
+                {% if settings.share_pinterest %}
+
+                <li><a  href="{{settings.block_pinterest_url}}" data-toggle="tooltip" title="Pinterest"><i class="icon icon-pinterest"></i></a></li>
+                {% endif %}
+
+              </ul>
+            </div>
+            {%endif%}
+
+          </div>
+          <div class="right">
+            <img src="{{'show_popup.jpg'| asset_url }}" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+if ($.cookie('popoup-newletter') == 'closed') {
+$('.newsletterwrapper').remove();
+}
+$(window).load(function() {
+function show_popup1(){
+$('#email-modal').show();
+$('#email-modal .modal-window').show();
+}
+setTimeout(show_popup1, {{settings.popup_delay}} * 1000);
+$('#email-modal .close , #email-modal .modal-overlay').click(function(e) {
+e.preventDefault();
+$('#email-modal').hide();
+$('#email-modal .modal-window').hide();
+//       var date = new Date();
+//       date.setTime(date.getTime() + ({{settings.popup_delay}} * 1000));   
+//       jQuery.cookie('popoup-newletter', 'closed', {expires:date, path:'/'});
+});
+})
+</script>

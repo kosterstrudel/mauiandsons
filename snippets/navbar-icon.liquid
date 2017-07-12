@@ -1,0 +1,60 @@
+<ul class="navbar-icons icon1">
+
+  {% if customer %}
+  <li class="menubar-account">
+    <a href="#" title="" class="awemenu-icon">
+      <i class="icon icon-user-circle"></i>
+      <span class="awe-hidden-text">{{ 'customer.account.account' | t }}</span>
+    </a>
+
+    <ul class="submenu megamenu">
+      <li>
+        <div class="container-fluid">
+          <div class="header-account">
+
+
+            <div class="header-account-username">
+              <h4><a href="/account">{{ customer.name }}</a></h4>
+            </div>
+
+            <ul>
+
+              <li><a href="/account">{{ 'customer.account.account_info' | t }}</a></li>
+              <li><a href="/account/logout">{{ 'customer.account.log_out' | t }} </a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </li>
+
+  {% else %}
+  <li>
+    <a href="#" title="" class="awemenu-icon">
+      <i class="icon icon-user-circle"></i>
+      <span class="awe-hidden-text">Account</span>
+    </a>
+
+    <ul class="submenu dropdown">
+      <li>
+        <a href="/account" title="">{{'customer.account.log_in'|t}}</a>
+      </li>
+
+      <li>
+        <a href="/account/register" title="">{{'customer.account.register'|t}}</a>
+      </li>
+    </ul>
+  </li>
+  {%endif%}
+
+  <li>
+    <a href="/pages/wishlist" title="" class="awemenu-icon">
+      <i class="icon icon-star"></i>
+      <span class="awe-hidden-text">Wishlist</span>
+    </a>
+  </li>
+
+  {%include 'minicart'%}
+
+
+</ul>

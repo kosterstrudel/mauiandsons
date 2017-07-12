@@ -1,0 +1,25 @@
+{% unless collection_item_width %}
+{% assign collection_item_width = 'medium--one-half large--one-third' %}
+{% endunless %}
+
+{% unless collection_item_img_size %}
+{% assign collection_item_img_size = 'grande' %}
+{% endunless %}
+
+<div class="col-sm-4 margin-bottom-30">
+  <div class="img_ef1">
+
+    <a href="{{ collection.url }}" title="{{ collections.title}}">
+      {% if collection.image %} <img  src="{{ collection.image | img_url: 'grande' }}" alt="{{collection.title}}" title="{{collection.title}}"/>{% endif %}
+    </a>
+
+  </div>
+  <div class="center">
+    <h3 class="margin-bottom-15">{{ collection.title }}</h3>
+    <div class="margin-bottom-20"> {{ collection.all_products_count }} {{ collection.all_products_count | pluralize: 'Item', 'Items' }} total </div>
+    <a href="{{ collection.url }}" class="btn btn-lg btn-dark btn-outline">
+      <span>{{'list_collection.view_more'|t}}</span>
+    </a>
+  </div>
+
+</div>

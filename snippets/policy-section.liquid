@@ -1,0 +1,124 @@
+{% assign policy_style = settings.policy_style %}
+{%if policy_style == "style1" or policy_style == "style2" %}
+<section class=" {%if policy_style == "style1" %}border-bottom{%endif%}">
+  <div class="container">
+    <div class="policy-wrapper {%if policy_style == "style2" %}policy-style{%endif%}">
+      <div class="row">
+        {% for i in (1..3) %}
+        {% capture policy_img %}policy_{{ i }}.png{% endcapture %}      
+        {% capture policy_title %}policy_{{ i }}_title{% endcapture %}  
+        {% capture policy_des %}policy_{{ i }}_des{% endcapture %}
+        {% capture policy_svg %}policy{{i}}_svg{% endcapture %}
+        {% capture policy_svg_text %}svg_policy{{i}}_text{% endcapture %}
+
+        <div class="col-md-4 col-sm-4 col-xs-4">
+          <div class="policy">
+            {%if settings[policy_svg]%}
+            <div class="policy-icon retinal-policy">
+             {{settings[policy_svg_text]}}
+            </div>
+            {%else%}
+             <div class="policy-icon">
+              {{ policy_img | asset_url | img_tag: settings[policy_title] }}
+            </div>
+            {%endif%}
+
+            <div class="policy-text">
+              <h4>{{ settings[policy_title] }}</h4>
+              <p>{{ settings[policy_des] }}</p>
+            </div>
+          </div><!-- /.policy -->
+        </div>
+        {%endfor%}
+
+      </div><!-- /.row -->
+    </div><!-- /.policy-wrapper -->
+  </div><!-- /.container -->
+</section><!-- /section -->
+{%endif%}
+
+
+{%if policy_style == "style3" %}
+<section class="border-bottom">
+  <div class="container">
+    <div class="padding-bottom-30 padding-top-30">
+      <div class="row">
+        {% for i in (1..3) %}
+        {% capture policy_img %}policy_{{ i }}.png{% endcapture %}      
+        {% capture policy_title %}policy_{{ i }}_title{% endcapture %}  
+        {% capture policy_des %}policy_{{ i }}_des{% endcapture %} 
+        <div class="col-md-3">
+          <div class="policy policy-block">
+            <div class="policy-icon">
+              {{ policy_img | asset_url | img_tag: settings[policy_title] }}
+            </div>
+
+            <div class="policy-text">
+              <h4>{{ settings[policy_title] }}</h4>
+              <p>{{ settings[policy_des] }}</p>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+
+        <div class="col-md-3">
+          {%assign newletter_title= settings.newletter_title %}
+          {%assign newletter_des= settings.newletter_des %}
+          {%assign newletter_button= settings.newletter_button %}
+          {%assign newletter_input= settings.newletter_input %}
+
+          <div class="subscible-wrapper subscible-block">
+            <h3 class="subscribe-title">{{newletter_title}}</h3>
+
+            <div class="subscribe-comment">
+              <p>{{newletter_des}}</p>
+            </div>
+
+            <form method="GET" action="index.html" class="subscible-form">
+              <div class="form-group">
+                <label class="sr-only" for="subscribe-email">{{'subscible.email'|t}}</label>
+                <input type="email" placeholder="{{newletter_input}}" class="form-control" id="subscribe-email">
+              </div>
+
+              <div class="form-submit">
+                <button class="btn btn-lg btn-primary" type="submit">{{newletter_button}}</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div><!-- /.container -->
+</section><!-- /section -->
+{%endif%}
+{%if policy_style == "style4" %}
+<section class="policy-v4">
+  <div class="container">
+    <div class="padding-bottom-30 padding-top-30">
+      <div class="row">
+        {% for i in (1..3) %}
+        {% capture policy_img %}policy_{{ i }}.png{% endcapture %}      
+        {% capture policy_title %}policy_{{ i }}_title{% endcapture %}  
+        {% capture policy_des %}policy_{{ i }}_des{% endcapture %} 
+        <div class="col-md-4 col-sm-4">
+          <div class="policy policy-block">
+            <div class="policy-icon">
+              {{ policy_img | asset_url | img_tag: settings[policy_title] }}
+            </div>
+
+            <div class="policy-text">
+              <h4>{{ settings[policy_title] }}</h4>
+              <p>{{ settings[policy_des] }}</p>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+    </div>
+  </div><!-- /.container -->
+</section><!-- /section -->
+{%endif%}
+
+
+

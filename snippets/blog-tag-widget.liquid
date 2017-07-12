@@ -1,0 +1,11 @@
+<div class="widget widget_tag_cloud">
+  <h3 class="widget-title">{{ settings.blog_sidebar_tag_title}}</h3>
+
+  <div class="tagcloud">
+    {% for tag in blog.all_tags %}
+    <a href="/blogs/news/tagged/{{ tag }}" title="">{{ tag }} </a>
+    
+{% endfor %}
+    
+  </div>
+</div>

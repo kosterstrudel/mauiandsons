@@ -1,0 +1,38 @@
+
+<section>
+  <div class="container">
+    {%capture trending_title%}trending_title{%endcapture%}
+{%capture trending_subtitle%}trending_subtitle{%endcapture%}
+
+<div class="home-trending padding-vertical-50">
+  <div class="section-header center">
+    <h2 class="upper margin-bottom-20">{{settings[trending_title]}}</h2>
+    <p>{{settings[trending_subtitle]}}</p>
+  </div><!-- ./section-header -->
+
+  <div class="row">
+	{% for i in (1..4) %}
+      {%capture trending_url%}trending_{{i}}_url{%endcapture%}
+      {%capture trending_img%}trending_img_{{i}}.jpg{%endcapture%}
+      {%capture trending_title_item%}trending_{{i}}_title{%endcapture%}
+    <div class="col-md-3 col-sm-6 col-xs-6">
+      <div class="awe-media">
+        <div class="awe-media-image img_ef1">
+          <a href="{{settings[trending_url]}}" title="{{settings[trending_title_item]}}">
+             {{trending_img|asset_url|img_tag: settings[trending_url]}}
+          </a>
+        </div><!-- /.awe-media-image -->
+
+        <div class="awe-media-body center margin-vertical-20">
+          <a href="{{settings[trending_url]}}" title="{{settings[trending_title_item]}}">{{settings[trending_title_item]}}</a>
+        </div><!-- /.awe-media-body -->
+      </div><!-- /.awe-media -->
+    </div>
+
+    {%endfor%}
+
+  </div><!-- /.row -->
+</div><!-- /.home-trending -->
+
+  </div><!-- /.container -->
+</section><!-- /section -->

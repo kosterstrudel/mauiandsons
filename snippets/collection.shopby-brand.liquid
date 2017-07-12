@@ -1,0 +1,27 @@
+<div class="widget woocommerce widget_product_prices filter-custom filter-tag">
+  {% assign tags = settings.shop_by_tags_3_list_tags | split: ',' %} 
+  <h3 class="widget-title">
+    {{settings.shopby_brand_title}}<a href="javascript:void(0)" class="clear" style="display:none" ><i class="fa fa-times-circle"></i></a>
+  </h3>
+  <div class="widget-content">    
+    <ul>
+      {% for t in tags %}
+      {% assign tag = t | strip %}
+      {% assign tag_value = tag | handleize %}      
+      {% if current_tags contains tag %}
+      <li class="li-price">
+        <input type="checkbox" value="{{ tag_value | split: '|' | first }}" checked/>
+        <label>{{ tag | split: '|' | first }}</label>
+      </li>
+      {% else %}
+      {% if collection.tags contains tag %} 
+      <li class="li-price">
+        <input type="checkbox" value="{{ tag_value | split: '|' | first }}"/>       
+        <a href="javascript:void(0)" title="{{tag}}">{{tag}}</a>
+      </li>
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>

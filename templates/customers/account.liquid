@@ -1,0 +1,142 @@
+<div class="container">
+  <div>
+    <h3>{{ 'customer.account.title' | t }}</h3>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <h4 class=" alert">{{ 'customer.account.orders' | t }}</h4>
+
+      {% comment %}
+      If we have past orders, loop through each one
+      {% endcomment %}
+
+      {% paginate customer.orders by 20 %}
+
+      {% if customer.orders.size != 0 %}
+
+ 
+      <div class="table-responsive">
+        <table class="table cart-table">
+          <thead>
+            <tr>
+              <th>{{ 'customer.orders.order_number' | t }}</th>
+              <th>{{ 'customer.orders.date' | t }}</th>
+              <th>{{ 'customer.orders.payment_status' | t }}</th>
+              <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+              <th>{{ 'customer.orders.total' | t }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in customer.orders %}
+            <tr>
+              <td class="product-name">
+                <a href="{{order.customer_url}}">
+                  <span><a href="{{order.customer_url }}"> {{ order.name | link_to: order.customer_url }}</a></span>
+                </a>
+              </td>
+              <td >
+                <p > {{ order.created_at | date: "%b %d, %Y" }}</p>
+              </td>
+              <td >
+                <p > {{ order.financial_status_label }}</p>
+              </td>
+              <td >
+                <p >{{ order.fulfillment_status_label }}</p>
+              </td>
+              <td >
+                <p >{{ order.total_price | money }}</p>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      {% else %}
+
+      <p>{{ 'customer.orders.none' | t }}</p>
+
+      {% endif %}
+
+      {% if paginate.pages > 1 %}
+      <div class="text-center">
+        {% include 'pagination-custom' %}
+      </div>
+      {% endif %}
+
+      {% endpaginate %}
+
+    </div>
+
+    <div class="col-sm-4">
+      <h4 class="alert-dark alert">{{ 'customer.account.your_addr' | t }}</h4>
+      <div class="padding-left-20">
+
+
+
+        <h5>{{ customer.name }}</h5>
+
+        {% if customer.default_address != nil %}
+        <div>
+
+          <div class="form-group">
+            <label for="first_name" class="login">{{ 'customer.addresses.address1' | t }}<sup>*</sup></label>
+            <span>{{ customer.default_address.address1 }}</span>
+          </div><!-- /.form-group -->
+          {% if customer.default_address.address2 != "" %}
+          <div class="form-group">
+            <label for="first_name" class="login">{{ 'customer.addresses.address2' | t }}<sup>*</sup></label>
+            <span>{{ customer.default_address.address2 }}</span>
+          </div><!-- /.form-group -->
+
+          {% endif %}
+
+          {% if customer.default_address.city != "" %}
+          <div class="form-group">
+            <label for="first_name" class="login">{{ 'customer.addresses.city' | t }}<sup>*</sup></label>
+            <span> {{ customer.default_address.city }}</span>
+          </div><!-- /.form-group -->
+
+          {% endif %}
+
+          {% if customer.default_address.province_code != "" %}
+          <div class="form-group">
+            <label for="first_name" class="login">{{ 'customer.addresses.province' | t }}<sup>*</sup></label>
+            <span>  {{ customer.default_address.province_code | upcase }}</span>
+          </div><!-- /.form-group -->
+
+          {% endif %}
+
+          {% if customer.default_address.zip != "" %}
+          <div class="form-group">
+            <label for="first_name" class="login">{{ 'customer.addresses.zip' | t }}<sup>*</sup></label>
+            <span>  {{ customer.default_address.zip | upcase }}</span>
+          </div><!-- /.form-group -->
+
+          {% endif %}
+
+          {% if customer.default_address.country != "" %}
+          <div class="form-group">
+            <label for="first_name" class="login">{{ 'customer.addresses.country' | t }}<sup>*</sup></label>
+            <span> {{ customer.default_address.country }}</span>
+          </div><!-- /.form-group -->
+          {% endif %}
+
+          {% if customer.default_address.phone != "" %}
+          <div class="form-group">
+            <label for="first_name" class="login">{{ 'customer.addresses.phone' | t }}<sup>*</sup></label>
+            <span>  {{ customer.default_address.phone }}</span>
+          </div><!-- /.form-group -->
+
+          {% endif %}
+        </div>
+
+        {% endif %}
+
+
+      </div>
+      <p ><a class="btn btn-lg btn-primary margin-right-15" href="/account/addresses">{{ 'customer.account.view_addresses' | t }}</a></p>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,26 @@
+
+<div class="widget">
+  <h3 class="widget-title">{{settings.blog_sidebar_social_title}}</h3>
+
+  <ul class="list-socials">
+
+
+    {% if settings.share_facebook %}  
+    <li><a href="{{settings.block_facebook_url}}" data-toggle="tooltip" title="Facebook"><i class="icon icon-facebook"></i></a></li>
+    {% endif %}
+    {% if settings.share_pinterest %}
+
+    <li><a  href="{{settings.block_pinterest_url}}" data-toggle="tooltip" title="Pinterest"><i class="icon icon-pinterest"></i></a></li>
+    {% endif %}
+    {% if settings.block_instagram_url %}
+    <li><a  href="{{settings.block_instagram_url}}" data-toggle="tooltip" title="Instagram"><i class="icon icon-instagram"></i></a></li>
+    {% endif %}
+    {% if settings.block_youtube_url %}
+    <li><a  href="{{settings.block_youtube_url}}" data-toggle="tooltip" title="Youtube"><i class="icon icon-youtube"></i></a></li>
+    {% endif %}
+
+   
+
+
+  </ul>
+</div><!-- /.widget -->

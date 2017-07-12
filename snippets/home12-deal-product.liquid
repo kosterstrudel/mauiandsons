@@ -1,0 +1,55 @@
+<section class="product-deals margin-bottom-50 margin-top-50">
+  <div class="container">
+    <div class="backgrounds" style="background-image: url({{'deal_background.jpg'|asset_url}})">
+	<div class="content-deals">
+      <div class="row">
+        <div class="col-md-5 col-sm-5">
+          <div class="text-center">
+            {{'deal_product.png'|asset_url|img_tag}}
+          </div>
+        </div>
+
+        <div class="col-md-7 col-sm-7">
+          <div class="saleoff-actions">
+            <h5>{{settings.deal_title}}</h5>
+            <h4>{{all_products[settings.deal_product].title}}</h4>
+            <span class="saleoff-price">
+              <span class="amount">{{all_products[settings.deal_product].price|money}}</span>
+              <del class="amount">{{all_products[settings.deal_product].compare_at_price|money}}</del>
+            </span><!-- /.product-price -->
+
+            <p>{{all_products[settings.deal_product].description}}</p>
+            <a href="{{all_products[settings.deal_product].url}}">
+
+            <button class="btn btn-lg btn-primary" onclick="window.location.href='{{settings.deal_product_url}}'">{{settings.deal_product_button}}</button>
+            </a>
+            <ul data-countdown="countdown" data-date="{{settings.deal_product_enddate}}" class="deals-coundown">
+      		</ul>
+
+            <div class="product-socials">
+              <ul class="list-socials">
+                <li><i class="fa fa-share-alt"></i> Share</li>
+              
+                  <li><a  href="//twitter.com/share?text={{all_products[settings.deal_product].title}}&amp;url={{all_products[settings.deal_product].url}}" data-toggle="tooltip" title="Twitter"><i class="icon icon-twitter"></i></a></li>
+         
+           
+                  <li><a href="//www.facebook.com/sharer.php?u={{all_products[settings.deal_product].url}}" data-toggle="tooltip" title="Facebook"><i class="icon icon-facebook"></i></a></li>
+        
+
+          
+                  <li><a  href="//plus.google.com/share?url={{all_products[settings.deal_product].url}}" data-toggle="tooltip" title="Google+"><i class="icon icon-google-plus"></i></a></li>
+
+                  <li><a  href="//pinterest.com/pin/create/button/?url={{all_products[settings.deal_product].url}}&amp;media=http:{% if template contains 'product' %}{{ product | img_url: '1024x1024' }}{% else %}{{ article | img_url: '1024x1024' }}{% endif %}&amp;description={{ shareTitle }}" data-toggle="tooltip" title="Pinterest"><i class="icon icon-pinterest"></i></a></li>
+              </ul>
+            </div>
+          </div><!-- /.product-list-actions -->
+          
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+

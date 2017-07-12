@@ -1,0 +1,33 @@
+
+<section class="home13-category">
+  <div class="container">
+    <div class="padding-bottom-30 padding-top-30">
+      <div class="row">
+        {% for i in (1..4) %}
+        {% capture category_img %}category2_image{{i}}.png{% endcapture %}      
+        {% capture category_title %}category2_title{{i}}{% endcapture %}  
+        {% capture category_des %}category2_des{{i}}{% endcapture %} 
+        {% capture category_url %}category2_url{{i}}{% endcapture %} 
+        <div class="col-md-3 col-sm-3">
+          <div class="category-block">
+            <div class="category-icon">
+              {{ category_img | asset_url | img_tag: settings[category_title] }}
+            </div>
+
+            <div class="category-text">
+              <p>{{ settings[category_des] }}</p>
+              <a href="{{settings[category_url]}}">
+              <h4>{{ settings[category_title] }}</h4>
+              </a>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+
+      </div>
+    </div>
+  </div><!-- /.container -->
+</section><!-- /section -->
+<div class="container">
+  <div class="divider"></div>
+</div>

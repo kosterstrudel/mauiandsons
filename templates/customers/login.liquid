@@ -1,0 +1,89 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><a href="/">{{ 'general.breadcrumbs.home' | t }}</a></li>
+    <li class="active"><span>{{ 'general.breadcrumbs.log_in' | t }}</span></li>
+  </ol>
+</div>
+
+<div class="login-register-wrapper">
+  <div class="container">
+    <div class="row">
+      {% form 'customer_login' %}
+      {{ form.errors | default_errors }}
+      <div class="col-md-6 col-centered" id="customer">
+        <h2>{{ 'customer.login.title' | t }}</h2>      
+        <div class="form-group">
+          <label for="email" class="login">{{ 'customer.login.email' | t }} <sup>*</sup></label>
+          <input type="email" value="" name="customer[email]" id="email" class="form-control dark" class="form-control dark" />
+
+        </div><!-- /.form-group -->
+
+        {% if form.password_needed %}
+        {% comment %}
+        Customer Account Login
+        {% endcomment %}
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="password">
+              <label for="password" class="login">{{ 'customer.login.password' | t }}<sup>*</sup></label>
+              <input type="password" value="" name="customer[password]" id="password" class="form-control dark" size="30" />
+            </div><!-- /.form-group -->
+          </div>
+        </div>
+
+        <div class="margin-top-15"><p>
+          <a href="#" onclick="showRecoverPasswordForm();return false;" >{{ 'customer.login.forgot_password' | t }}</a>
+          <span> - </span>
+          <a href="/account/register" >{{ 'customer.login.register' | t }}</a>
+          </p></div>
+
+        {% endif %}
+
+        <div class="action_bottom">
+          <input type="submit" class="btn btn-lg btn-primary margin-top-30 margin-bottom-50" value="{{ 'customer.login.sign_in' | t }}" />
+        </div>
+
+
+      </div>
+      {% endform %}
+
+
+      <div id="recover-password" class="col-md-6 col-centered" style='display:none'>
+        <h2>{{ 'customer.recover_password.title' | t }}</h2>      
+
+        {% form 'recover_customer_password' %}
+        {{ form.errors | default_errors }}
+        <div id="recover_email" class="form-group">
+          <label for="email" class="large">{{ 'customer.recover_password.email' | t }}<sup>*</sup></label>
+          <input type="email" value="" size="30" name="email" id="recover-email" class="form-control dark" />
+        </div>
+        <p>{{ 'customer.recover_password.subtext' | t }}</p>
+        <div class="action_bottom">
+          <input type="submit" class="btn btn-lg btn-primary margin-top-30 margin-bottom-50" value="{{ 'customer.login.forgot_password_submit_button' | t }}" />
+          <span> {{ 'customer.general.or' | t }} <a href="#" onclick="hideRecoverPasswordForm();return false;">{{ 'customer.recover_password.cancel' | t }}</a></span>
+        </div>
+        {% endform %}
+      </div>
+
+
+      
+
+    </div>
+
+  </div><!-- /.container -->
+</div><!-- /.checkout-wrapper -->
+
+<script type="text/javascript">
+  function showRecoverPasswordForm() {
+    document.getElementById('recover-password').style.display = 'block';
+    document.getElementById('customer').style.display='none';
+  }
+
+  function hideRecoverPasswordForm() {
+    document.getElementById('recover-password').style.display = 'none';
+    document.getElementById('customer').style.display = 'block';
+  }
+
+  if (window.location.hash == '#recover') { showRecoverPasswordForm() }
+</script>

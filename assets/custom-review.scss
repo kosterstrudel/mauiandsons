@@ -1,0 +1,72 @@
+.template-collection .spr-badge{
+height: 25px;
+}
+.template-product ,.template-collection {
+  .spr-icon{
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    &:before{
+      font-family: FontAwesome;
+      content: "\f005";
+      padding-right: 9px;
+      color: #ffa200;
+      line-height: auto;
+      font-size: 19px;
+      width: auto;
+      opacity: 1;
+    }
+  }
+  .tab-content .spr-icon{
+    &:before{
+      font-family: FontAwesome;
+      content: "\f005";
+      padding-right: 5px;
+      color: #ffa200;
+      line-height: auto;
+      font-size: 13px;
+      width: auto;
+      opacity: 1;
+    }
+
+  }
+  .spr-icon.spr-icon-star-empty{
+    &:before{
+      color: #ACACAC;
+      opacity: 1;
+    }
+  }
+  .spr-header-title{
+    font-weight: 700;
+    font-family: Montserrat, Arial, sans-serif;
+        font-size: 16px;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 25px;
+  }
+  .tab-content #shopify-product-reviews{
+    margin-top: 0;}
+  .spr-form-input-text, .spr-form-input-email, .spr-form-input-textarea{
+    border-color: #e1e1e1;
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #555555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  }
+}
+.product-stars{ 
+  .spr-badge-starrating .spr-icon{
+    font-size: 18px;}
+}
+.tab-content .spr-container{
+  padding: 0;
+  border: none;}

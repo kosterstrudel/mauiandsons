@@ -1,0 +1,46 @@
+
+<section>
+  <div class="home12-testimonial"  style="background-image: url({{'testimonial_background.jpg'| asset_url}})" >
+  {% capture title %}testimonial_title{% endcapture %}
+  {% capture background %}testimonial_img.jpg{% endcapture %}
+  <div class="container">
+    <div class="padding-top-40 padding-bottom-60">
+      <div class="section-header center">
+        <h2 class="testimonial-header">{{settings[title]}}</h2>
+      </div><!-- /.section-header -->
+
+      <div class="section-customers " >
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="owl-carousel customers-carousel" id="customers-carousel" data-toggle="carousel" data-dots="true" data-nav="0">
+              {% for i in (1..8) %}
+              {% capture enable %}testimonial_{{ i }}{% endcapture %}
+              {% capture des %}testimonial_des_{{ i }}{% endcapture %}
+              {% capture name %}testimonial_name_{{ i }}{% endcapture %}
+              {% capture work %}testimonial_work_{{ i }}{% endcapture %}
+			  {% capture img %}testimonial_img_{{ i }}{% endcapture %}
+
+              {% if settings[enable] %} 
+              <div class="row">
+                <div class="col-md-12 col-sm-12 ">
+                  {{ img | asset_url | img_tag }}
+                </div>
+                <div class="col-md-12  col-sm-12">
+                
+                <p>“{{settings[des]}}“</p>
+                  <h4 class="upper">{{settings[name]}}</h4>
+                  <p>{{settings[work]}}</p>
+                </div>
+              </div><!-- /.center -->
+
+              {% endif %}
+              {% endfor %}
+
+            </div><!-- /.customers-say-carousel -->
+          </div>
+        </div>
+      </div><!-- /.section-content -->
+    </div>
+  </div><!-- /.container -->
+  </div>
+</section><!-- /section -->

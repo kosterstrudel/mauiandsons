@@ -1,0 +1,39 @@
+
+
+<section>
+  <div class="container">
+    <div class="padding-vertical-50">
+      {% assign products_per_row = settings.new_arrival_num %}
+      {% assign products_limit = settings.new_arrival_limit %}
+      {% assign title = settings.new_arrival_title %}
+      {% assign col = settings.collection_new_arrival %}
+
+      {% assign url = settings.new_arrival_url%}
+
+      <div class="arrivals">
+        <div class="section-header center">
+          <h2>{{title}}</h2>
+        </div><!-- /.section-header -->
+
+        <div class=" {% for product in collections[col].products limit: products_limit %}{%else%}helper-section{%endfor%} ">
+
+        <div class="products home-products owl-carousel" data-items="4">
+
+          {% for product in collections[col].products limit: settings.new_arrival_limit%}         
+          {% include 'product-grid' %}
+          {%else%}
+
+          {%include 'product-grid-sample'%}
+
+
+          {% endfor %}
+
+        </div><!-- /.products -->
+        
+
+      </div> 
+      </div><!-- /.arrivals -->
+    </div>
+  </div><!-- /.container -->
+</section><!-- /section -->
+ 

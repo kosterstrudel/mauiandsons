@@ -1,0 +1,153 @@
+(function($) {
+
+
+  $(document).ready(function() {
+    engo.init();
+  }); 
+
+  $(document).on('click','.overlay,.continue-shopping, .close-window', function() {   
+    hidePopup('.engo-popup'); 
+
+    setTimeout(function(){
+      $('.loading').removeClass('loaded-content');
+    },500);
+    return false;
+  });
+
+  $('.dropdown-toggle').click(function() {
+    $('.dropdown-content').removeClass('active');
+    $(this).next().toggleClass('active');    
+    return false;              
+  });  
+
+  var engo = { 
+    init: function() {
+      this.initHideDropdown();
+      this.initToggle(); 
+
+      this.initSearch();
+      this.initDropDownCart();
+
+      this.initProductAddToCart();
+
+      /* Mobile Menu */
+      this.initMobileMenu();
+
+    },
+
+    /* Hide Dropdown */
+    initHideDropdown: function(){
+      $(document).on('click touchstart', function(e) {
+        var mobileMenu = $(".main-menu");
+        var topCart = $(".topCart");
+        var dropdown = $(".dropdown-content");
+        if (!mobileMenu.is(e.target) && mobileMenu.has(e.target).length === 0 && !topCart.is(e.target) && topCart.has(e.target).length === 0 && !dropdown.is(e.target) && dropdown.has(e.target).length === 0) {
+          mobileMenu.removeClass('active');
+          topCart.removeClass('active');
+          dropdown.removeClass('active');      
+        }
+      });
+    },
+
+
+    /* Dropdown Toggle */
+    initToggle: function(){
+      $('.caret').click(function() {        
+        $(this).parent().next().toggleClass('active');        
+        return false; 
+      }); 
+
+      $(".block-category .sub-menu > li").each( function(){
+        if($(this).hasClass('active')){
+          $(this).parent().addClass('active');
+        }
+      });
+
+      $('.dropdown-toggle').click(function() {
+        $('.dropdown-content').removeClass('active');
+        $(this).next().toggleClass('active');    
+        return false;              
+      });   
+    },
+    
+    /* --------------------------------------------------------- */
+    /* Search */
+    initSearch: function() {
+      $('.btn-search').click(function(event) {   
+        showPopup('.search-popup');
+        event.preventDefault();      
+
+      });     
+
+    },  
+
+    /* --------------------------------------------------------- */
+    /* Mobile Menu */
+    initMobileMenu: function() {
+
+      $('.mobile-menu').click(function() {      
+        $(this).parent().toggleClass('active');    
+        return false; 
+      });   
+    }, 
+
+
+    /* Check Item Mini Cart */
+    checkItemsInMiniCart: function() {
+      if($('.mini-cart .mini-products-list').children().length > 0) {
+        $('.mini-cart').addClass('hasItem');          
+      } else{
+        $('.mini-cart').removeClass('hasItem'); 
+      }
+    },
+
+    /* Mini Cart Click to Show */
+    initDropDownCart: function() {      
+      $('.dropdow .cartCount').click(function() {
+        $(this).parent('.topCart').toggleClass('active');
+      });            
+      engo.checkItemsInMiniCart();
+
+      $('.mini-cart .btn-remove').click(function(event) {       
+        event.preventDefault();
+        var productId = $(this).parents('.item').attr('id');
+        productId = productId.match(/\d+/g);
+        Shopify.removeItem(productId, function(cart) {
+          doUpdateMiniCart(cart);       
+        });
+      });
+    },
+
+    
+
+    /* ------------------------------- */
+    /* Product detail - Add to cart */
+
+    initProductAddToCart: function() {
+      $('#product-addTocart').click(function(event) {
+
+        event.preventDefault();
+        if ($(this).attr('disabled') != 'disabled') {
+          var variant_id = $('#AddToCartForm select[name=id]').val();
+          if (!variant_id) {
+            variant_id = $('#AddToCartForm input[name=id]').val();
+          }
+          var quantity = $('#AddToCartForm input[name=quantity]').val();
+          if (!quantity) {
+            quantity = 1;
+          }
+          var title = $('h1.product-name').html();
+          var image = $('#ProductPhotoImg').attr('src');
+
+          doAjaxAddToCart(variant_id, quantity, title, image);
+
+        }
+
+        return false;
+      });
+
+    },
+
+  }
+
+  })(jQuery);

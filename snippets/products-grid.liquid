@@ -1,0 +1,13 @@
+{%capture num_col%}collection_number_col{%endcapture%}
+{%capture num_col2%}collection_number_col_2{%endcapture%}
+{%capture num_col3%}collection_number_col_3{%endcapture%}
+
+<div class="products products-grid-wrapper">
+  <div class="row">
+    {% for product in collection.products %}
+    <div class="col-md-{{settings[num_col]}} col-sm-{{settings[num_col2]}} col-xs-{{settings[num_col3]}} product-wrap product-wrap1">
+      {% include "product-grid" %}
+    </div>    
+    {% endfor %}
+  </div><!-- /.row -->
+</div><!-- /.products -->

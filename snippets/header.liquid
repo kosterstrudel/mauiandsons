@@ -1,0 +1,41 @@
+{%assign header_style = settings.header_style %}
+{% if header_style == "style1" %}
+    <header id="header" class="awe-menubar-header">
+        <nav class="awemenu-nav headroom" data-responsive-width="1200">
+            <div class="container">
+                <div class="awemenu-container">
+
+                    <div class="navbar-header">
+                        {% include "navbar-icon" %}
+                        {% include "search" %}
+                    </div>
+                    {% include "logo" %}
+
+                    <ul class="awemenu awemenu-right">
+                        {% include "navbar-menu" %}
+                    </ul><!-- /.awemenu -->
+                </div>
+            </div><!-- /.container -->
+
+        </nav><!-- /.awe-menubar -->
+    </header><!-- /.awe-menubar-header -->
+{%endif%}
+{% if header_style == "style2" %}
+{% include "header-style-1" %}
+{% endif %}
+{% if header_style == "style3" %}
+{% include "header-style-2" %}
+{% endif %}
+{% if header_style == "style4" %}
+{% include "header-style-3" %}
+{% endif %}
+{% if header_style == "style5" %}
+{% include "header-style-4" %}
+{% endif %}
+{% if header_style == "style6" %}
+{% include "header-style-5" %}
+{% endif %}
+{% if header_style == "style7" %}
+{% include "header-style-6" %}
+{% endif %}
+

@@ -1,0 +1,14 @@
+
+{%for i in (1..11)%}
+{%capture home_section%}home_section_{{i}}{%endcapture%}
+{%capture border_bottom%}home_section_{{i}}_border{%endcapture%}
+{% if settings[home_section] != blank %}
+{% include settings[home_section]} %}
+{%if settings[border_bottom]%}
+<div class="container">
+  <div class="divider"></div>
+</div>
+{%endif%}
+{% endif %}
+{%endfor%}
+

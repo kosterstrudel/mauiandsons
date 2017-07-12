@@ -1,0 +1,165 @@
+{% assign col1 = settings.category_1_collection %}
+{% assign col2 = settings.category_2_collection %}
+{% assign col3 = settings.category_3_collection %}
+{%capture collection_1%}category_1_collection{%endcapture%}
+{%capture category_title_1 %}category1_title{%endcapture%}
+{%capture category_subtitle_1 %}category1_subtitle{%endcapture%}
+{%capture category_img_1%}category1_img.jpg{%endcapture%}
+{%capture category_img2_1%}category1_img2.jpg{%endcapture%}
+{%capture category_url_1%}category1_url{%endcapture%}
+
+{%capture collection_2%}category_2_collection{%endcapture%}
+{%capture category_title_2 %}category2_title{%endcapture%}
+{%capture category_subtitle_2 %}category2_subtitle{%endcapture%}
+{%capture category_img_2%}category2_img.jpg{%endcapture%}
+{%capture category_img2_2%}category2_img.jpg{%endcapture%}
+{%capture category_url_2%}category2_url{%endcapture%}
+
+{%capture collection_3%}category_3_collection{%endcapture%}
+{%capture category_title_3 %}category3_title{%endcapture%}
+{%capture category_subtitle_3 %}category3_subtitle{%endcapture%}
+{%capture category_img_3%}category3_img.jpg{%endcapture%}
+{%capture category_img2_3%}category3_img2.jpg{%endcapture%}
+{%capture category_url_3%}category3_url{%endcapture%}
+{%assign products_limit = '9'%}
+
+<div class="home-products padding-vertical-60">
+  <div class="row">
+
+    <div class="col-md-3 col-sm-4">
+      <div class="awe-media home-cate-media">
+        <div class="awe-media-header">
+          <div class="awe-media-image">
+            {{ category_img_1 | asset_url | img_tag: settings[category_title_1] }}
+          </div><!-- /.awe-media-image -->
+
+          <div class="awe-media-overlay overlay-dark-50 fullpage">
+            <div class="content">
+
+              <div class="fp-table text-left">
+                <div class="fp-table-cell">
+
+                  <h2 class="upper">{{settings[category_title_1]}}</h2>
+                  <p class="margin-bottom-50">{{settings[category_subtitle_1]}}</p>
+                  <a href="{{settings[category_url_1]}}" class="btn btn-sm btn-outline btn-white">View All</a>
+
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /.awe-media-overlay -->
+
+        </div><!-- /.awe-media-header -->
+      </div><!-- /.awe-media -->
+    </div>
+
+    <div class="col-md-9 col-sm-8 ">
+      <div class=" {% for product in collections[col1].products limit: products_limit %}{%else%}helper-section{%endfor%} ">
+        <div class="products owl-carousel" data-items="3">
+        {% for product in collections[col1].products limit: products_limit %}
+        
+        {% include 'product-grid' %}
+        {%else%}
+          
+          {%include 'product-grid-sample'%}
+          
+        {% endfor %}
+      </div><!-- ./products -->
+        
+      
+      </div>
+    </div>
+  </div><!-- /.row -->
+
+  <div class="row">
+    <div class="col-md-3 col-sm-4 col-md-push-9 col-sm-push-8">
+      <div class="awe-media home-cate-media">
+        <div class="awe-media-header">
+          <div class="awe-media-image">
+            {{ category_img_2 | asset_url | img_tag: settings[category_title_2] }}
+          </div><!-- /.awe-media-image -->
+
+          <div class="awe-media-overlay overlay-dark-50 fullpage">
+            <div class="content">
+
+              <div class="fp-table text-left">
+                <div class="fp-table-cell">
+
+
+                  <h2 class="upper">{{settings[category_title_2]}}</h2>
+                  <p class="margin-bottom-50">{{settings[category_subtitle_2]}}</p>
+                  <a href="{{settings[category_url_2]}}" class="btn btn-sm btn-outline btn-white"> {{'collections.view_all'|t}}</a>
+
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /.awe-media-overlay -->
+        </div><!-- /.awe-media-header -->
+      </div><!-- /.awe-media -->
+    </div>
+
+    <div class="col-md-9 col-sm-8 col-md-pull-3 col-sm-pull-4">
+      <div class=" {% for product in collections[col2].products limit: products_limit %}{%else%}helper-section{%endfor%} ">
+        <div class="products owl-carousel" data-items="3">
+        {% for product in collections[col2].products limit: products_limit %}
+        
+        {% include 'product-grid' %}
+        {%else%}
+          
+          {%include 'product-grid-sample-2'%}
+          
+        {% endfor %}
+      </div><!-- ./products -->
+        
+      
+      </div>     
+    </div>
+  </div><!-- /.row -->
+
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <div class="awe-media home-cate-media">
+        <div class="awe-media-header">
+          <div class="awe-media-image">
+            {{ category_img_3 | asset_url | img_tag: settings[category_title_3] }}
+          </div><!-- /.awe-media-image -->
+
+          <div class="awe-media-overlay overlay-dark-50 fullpage">
+            <div class="content">
+
+              <div class="fp-table text-left">
+                <div class="fp-table-cell">
+
+                  <h2 class="upper">{{settings[category_title_3]}}</h2>
+                  <p class="margin-bottom-50">{{settings[category_subtitle_3]}}</p>
+                  <a href="{{settings[category_url_3]}}" class="btn btn-sm btn-outline btn-white">{{'collections.view_all'|t}}</a>
+
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /.awe-media-overlay -->
+        </div><!-- /.awe-media-header -->
+      </div><!-- /.awe-media -->
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <div class=" {% for product in collections[col3].products limit: products_limit %}{%else%}helper-section{%endfor%} ">
+        <div class="products owl-carousel" data-items="3">
+        {% for product in collections[col3].products limit: products_limit %}
+        
+        {% include 'product-grid' %}
+        {%else%}
+          
+          {%include 'product-grid-sample'%}
+          
+        {% endfor %}
+      </div><!-- ./products -->
+      
+      
+      </div> 
+     
+    </div>
+  </div><!-- /.row -->
+</div><!-- /.home-products -->

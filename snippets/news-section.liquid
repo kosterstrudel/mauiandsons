@@ -1,0 +1,124 @@
+{%if settings.section_news_style =='style1'%}
+<section>
+  <div class="container">
+    <div class="padding-vertical-60">
+      <div class="section-header">
+        <h2>{{settings.home_blog_title}}</h2>
+      </div>
+
+      <div class="section-content">
+        <div class="home-section-posts owl-carousel">
+          {% for article in blogs[settings.home_blog].articles limit: settings.home_blog_limit %}
+
+          <div class="section-post">
+            <div class="section-post-media">
+              <a href="{{ article.url }}" title="">
+                {{article.excerpt}}
+              </a>
+            </div>
+
+            <div class="section-post-body">
+              <div class="section-post-time">
+                <span> {{article.published_at | date: " %d" }}</span>
+                <small> {{article.published_at | date: "%B" }}</small>
+              </div>
+
+              <h4 class="section-post-title">
+                <a href="{{ article.url }}" title="{{ article.title }}">{{ article.title }}</a>
+              </h4>
+
+              <p class="section-post-excerpt">{{ article.content | strip_html | truncatewords: 10 }}</p>
+
+              <a href="{{ article.url }}" title="" class="read-more">{{'blogs.readmore'|t}}</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div><!-- /.container -->
+</section><!-- /section -->
+{%elsif settings.section_news_style =='style2'%}
+<section>
+  <div class="container">
+    <div class="padding-vertical-60">
+      <div class="section-header">
+        <h2>{{settings.home_blog_title}}</h2>
+      </div>
+
+      <div class="section-content">
+        <div class="home-section-posts2 owl-carousel">
+          {% for article in blogs[settings.home_blog].articles limit: settings.home_blog_limit %}
+
+          <div class="section-post">
+            <div class="section-post-media2">
+              <a href="{{ article.url }}" title="">
+                {{article.excerpt}}
+              </a>
+            </div>
+
+            <div class="section-post-body">
+              <div class="section-post-time2">
+                <span> {{article.published_at | date: " %d" }}</span>
+                <small> {{article.published_at | date: "%B" }}</small>
+              </div>
+
+              <h4 class="section-post-title">
+                <a href="{{ article.url }}" title="{{ article.title }}">{{ article.title }}</a>
+              </h4>
+
+              <p class="section-post-excerpt">{{ article.content | strip_html | truncatewords: 10 }}</p>
+
+              <a href="{{ article.url }}" title="" class="read-more">{{'blogs.readmore'|t}}</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div><!-- /.container -->
+</section><!-- /section -->
+{%else%}
+
+<section class="blog-v3">
+  <div class="container">
+    <div class="padding-vertical-60">
+      <div class="section-header">
+        <h2>{{settings.home_blog_title}}</h2>
+      </div>
+
+      <div class="section-content">
+        <div class="home-section-posts2 owl-carousel">
+          {% for article in blogs[settings.home_blog].articles limit: settings.home_blog_limit %}
+
+          <div class="section-post">
+            <div class="section-post-media2">
+              <a href="{{ article.url }}" title="">
+                {{article.excerpt}}
+              </a>
+            </div>
+
+            <div class="section-post-body">
+              <div class="section-post-time2">
+                <span> {{article.published_at | date: "%d %B %Y" }}</span>
+              </div>
+
+              <h4 class="section-post-title">
+                <a href="{{ article.url }}" title="{{ article.title }}">{{ article.title }}</a>
+              </h4>
+
+			<div class="entry-meta">
+                <span>{{ 'blogs.postby' | t }}</span>
+                <strong class="entry-author"><a href="{{ article.url }}" title="">{{ article.author }}</a></strong>
+                <span>-</span>
+                <span class="entry-comment-count"><a href="{{ article.url }}#comments" title="">{{article.comments_count}} {{ 'blogs.comment' | t }}</a></span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div><!-- /.container -->
+</section><!-- /section -->
+{%endif%}

@@ -1,0 +1,73 @@
+
+
+<li class="topCart dropdow">
+  <a href="javascript:void(0)" id="cartCount"  class="awemenu-icon menu-shopping-cart">     
+    <span class="CartCount">{{ cart.item_count }}</span>
+    <i class="icon icon-shopping-bag"></i>
+    <span class="awe-hidden-text">{{ 'minicart.cart' | t }}</span>
+  </a> 
+
+  <ul  id="mini-cart" class="submenu megamenu minicart mini-cart"> 
+    <li class="mini-cart-empty" >
+      <div class="container-fluid">
+        <span class="text-muted">{{ 'minicart.empty' | t }}</span>
+      </div>
+    </li>
+    <li class="mini-cartContent" style="display: none;">
+      <div class="container-fluid">
+        <ul class="mini-products-list whishlist ">  
+
+          {% for item in cart.items %}
+          <li class="whishlist-item">
+            <div class="item clearfix" id="cart-item-{{item.id}}">
+              <a href="{{item.url}}" class="product-image">
+                <img src="{{ item.image | product_img_url: 'small' }}" alt="{{item.title}}">
+              </a>
+              <div class="product-details">          
+                <h5 class="product-name">
+                  <a href="{{item.url}}">
+                    {{ item.title }}
+                  </a>
+                </h5>
+                {% if item.product.variants.size != 0 %}
+                <div class="option">
+                  
+                  {% unless item.variant.title contains 'Default' %}
+                  <small>{{ item.variant.title }}</small>
+                  {% endunless %}
+                  
+                </div>
+                {% endif %}
+                <div class="whishlist-price">
+                  <span>{{'customer.order.price'|t}}:</span>
+                  <strong>{{ item.price | money }}</strong>
+
+                </div>
+                <div class="whishlist-quantity">
+                  <span>{{'customer.order.quantity'|t}}:</span>
+                  <span>{{ item.quantity }}</span>
+                </div>
+                <a href="javascript:void(0)" title="remove" class="btn-remove"><i class="icon icon-remove"></i></a>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+
+
+        </ul>
+      </div>
+      <div class="summary container-fluid">                
+        <div class="total menu-cart-total">
+          <label class=" ">{{ 'minicart.total' | t }}</label>
+          <label class="price">{{cart.total_price | money}}</label> 
+        </div>
+        <div class="actions">
+          <a class="btn-cart btn btn-lg btn-dark btn-outline btn-block" href="/cart">{{ 'minicart.goto_cart' | t }}</a>
+          <a class="btn-checkout btn btn-lg btn-primary btn-block" href="/checkout">{{ 'minicart.checkout' | t }}</a>          
+        </div>
+      </div>
+
+    </li>
+
+  </ul>
+</li>

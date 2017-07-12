@@ -1,0 +1,25 @@
+
+<section>
+  <div class="container">
+    {%assign category_style = settings.category_style %}
+
+    {%if category_style == "style1" %}
+    {%include 'categories-style1-section'%}
+    {%endif%}
+    {%if category_style == "style2" %}
+    {%include 'categories-style2-section'%}
+    {%endif%}
+    {%if category_style == "style3" %}
+    {%include 'categories-style3-section'%}
+    {%endif%}
+    {%if category_style == "style4" %}
+    {%include 'categories-style4-section'%}
+    {%endif%}
+    {%if category_style == "style5" %}
+    {%include 'section-categories-style5'%}
+    {%endif%}
+    {%if category_style == "style6" %}
+    {%include 'section-categories-style6'%}
+    {%endif%}
+  </div><!-- /.container -->
+</section><!-- /section -->

@@ -1,0 +1,66 @@
+    <header id="header" class="awe-menubar-header header-style-6">
+      <div class="br-board engoc-topbar topbar">
+          <div class="container"> 
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12 hidden-xs">
+              <div class="social-topbar left" >
+              <ul class="left">
+				{%if settings.topbar_social != blank %}
+                   {{settings.topbar_social}}
+                {%endif%}
+              </ul>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+               {% include "search" %}
+              <ul class="topbar-text right">
+        
+				{% for link in linklists[settings.topbar_menu].links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>   
+                  {% endfor %}
+              </ul>
+
+            </div>
+            </div>
+          </div>
+        </div>
+        <nav class="awemenu-nav" data-responsive-width="1200">
+            <div class="container">
+                <div class="awemenu-container">
+                    <div class="navbar-header">
+                        {% include "navbar-icon2" %}
+                         {% include "navbar-icon" %}
+                       
+                    </div>
+                    {% include "logo" %}
+                 
+                   <div class="menu-account">
+                      <ul class="awemenu awemenu-right">
+                          {% include "navbar-menu" %}
+                      </ul><!-- /.awemenu -->
+                  
+                      <div class="account1">
+                      <ul>
+                        {% if customer %}
+                             
+                        <li><a href="/account">{{ 'customer.account.account_info' | t }}</a></li>
+                        <li><a href="/account/logout">{{ 'customer.account.log_out' | t }} </a></li>
+                        <li><a href="/pages/wishlist" >{{ 'customer.account.wishlist' | t }}</a></li> 
+
+                              {% else %}
+
+                        <li><a href="/account/login">{{'customer.account.log_in'|t}}</a></li>
+                        <li><a href="/account/register">{{'customer.account.register'|t}} </a></li>
+                        <li><a href="/pages/wishlist" >{{ 'customer.account.wishlist' | t }}</a></li> 
+                              {%endif%}
+                     
+                            
+                        
+                      </ul>
+                      </div>
+                  </div>
+                </div>
+            </div><!-- /.container -->
+
+        </nav><!-- /.awe-menubar -->
+    </header><!-- /.awe-menubar-header -->

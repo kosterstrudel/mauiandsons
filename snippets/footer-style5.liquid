@@ -1,0 +1,60 @@
+
+<div class="container footer-v5">
+  <div class="row">
+    <div class="col-md-3 col-sm-3">
+      <div class="row">
+        
+        <div class="col-md-12 col-sm-12 margin-bottom-50">
+          <img alt="" src="{{'footer_logo.png'|asset_url}}">
+        </div>
+        <div class="col-md-12 col-sm-12">
+          {% include "about-widget" %}
+        </div>
+
+        
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-3">
+      <div class="row">
+        
+        
+        <div class="col-md-12 col-sm-12 margin-bottom-50">
+          <ul class="list-socials social border-rightf">
+            {{settings.footer_social_content}}
+          </ul>
+        </div>
+        <div class="col-md-12 col-sm-12">
+          {% include "help-info-widget" %}
+        </div>
+
+        
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-3">
+      
+      <div class="col-md-12 col-sm-12 margin-bottom-50">
+          <ul class="list-socials">
+          {{settings.footer_payment_content}}
+        </ul>
+        </div>
+      <div class="col-md-12 col-sm-12">
+          {% include "shopping-widget" %}
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-3">
+      <div class="col-md-12 col-sm-12 margin-bottom-50">
+          <a href="{{settings.footer_button_url}}" class="btn btn-lg btn-white">
+          <span>{{settings.footer_button}}</span>
+        </a>
+        </div>
+      
+      <div class="col-md-12 col-sm-12" >
+          {% include "more-link-widget" %}
+        </div>
+
+    </div>
+  </div>
+</div>

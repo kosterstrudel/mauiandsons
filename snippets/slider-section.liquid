@@ -1,0 +1,128 @@
+<div class="main-slider">
+  {% unless settings.slideshow_fullwidth %}
+  <div class="container">
+    {% endunless  %}
+    <div class="fullwidthbanner-container">
+      <div id="rev_slider" class="rev_slider fullwidthabanner">
+        <ul>
+          {% for i in (1..5) %}
+          {% capture enable %}slide_{{ i }}_enable{% endcapture %}
+
+          {% if settings[enable] %}
+          {% capture transition %}slide_{{ i }}_transition{% endcapture %}
+          {% capture thumb %}slide{{ i }}_image.jpg{% endcapture %}
+          {% capture heading %}slide_{{ i }}_heading{% endcapture %} 
+          {% capture headingEffect %}slide_{{ i }}_headingEffect{% endcapture %} 
+          {% capture dataX %}slide_{{ i }}_heading_x{% endcapture %}
+          {% capture dataY %}slide_{{ i }}_heading_y{% endcapture %}        
+          {% capture headingSpacing %}slide_{{ i }}_heading_spacing{% endcapture %}  
+
+
+          {% capture text %}slide_{{ i }}_text{% endcapture %}   
+          {% capture tEffect %}slide_{{ i }}_textEffect{% endcapture %} 
+          {% capture tdataX %}slide_{{ i }}_text_x{% endcapture %}
+          {% capture tdataY %}slide_{{ i }}_text_y{% endcapture %}
+          {% capture tSpacing %}slide_{{ i }}_text_spacing{% endcapture %}  
+          
+          {% capture text2 %}slide_{{ i }}_text2{% endcapture %}   
+          {% capture tEffect2 %}slide_{{ i }}_text2Effect{% endcapture %} 
+          {% capture tdataX2 %}slide_{{ i }}_text2_x{% endcapture %}
+          {% capture tdataY2 %}slide_{{ i }}_text2_y{% endcapture %}
+          {% capture tSpacing2 %}slide_{{ i }}_text2_spacing{% endcapture %} 
+
+
+          {% capture button %}slide_{{ i }}_button_text{% endcapture %}   
+          {% capture bEffect %}slide_{{ i }}_buttonEffect{% endcapture %}        
+          {% capture bdataX %}slide_{{ i }}_button_x{% endcapture %}
+          {% capture bdataY %}slide_{{ i }}_button_y{% endcapture %}        
+          {% capture blink %}slide_{{ i }}_button_link{% endcapture %}
+
+          {% capture hColor %}slide_{{ i }}_heading_color{% endcapture %}   
+          {% capture hsize %}slide_{{ i }}_heading_font_size{% endcapture %}  
+
+          {% capture tColor %}slide_{{ i }}_text_color{% endcapture %}   
+          {% capture tsize %}slide_{{ i }}_text_font_size{% endcapture %} 
+          
+          {% capture tColor2 %}slide_{{ i }}_text2_color{% endcapture %}   
+          {% capture tsize2 %}slide_{{ i }}_text2_font_size{% endcapture %}   
+
+          {% capture bColor %}slide_{{ i }}_button_color{% endcapture %} 
+          {% capture bsize %}slide_{{ i }}_button_size{% endcapture %}  
+          
+           {% capture show_category %}slide_{{ i }}_show_category{% endcapture %}  
+           {% capture name_category %}slide_{{ i }}_button_category{% endcapture %}  
+           {% capture url_category %}slide_{{ i }}_button_category_link{% endcapture %}  
+          {% capture category_x %}slide_{{ i }}_category_x{% endcapture %}  
+           {% capture category_y %}slide_{{ i }}_category_y{% endcapture %}
+          
+         
+
+          {% capture hStyle %}
+          {% if settings[headingSpacing] != "" %} letter-spacing: {{settings[headingSpacing]}}; {% endif %}        
+          {% if settings[hColor] != "" %} color: {{settings[hColor]}}; {% endif %}  
+          {% if settings[hsize] != "" %} font-size: {{settings[hsize]}}; {% endif %}
+          {% endcapture %} 
+
+          {% capture tStyle %} 
+          {% if settings[tSpacing] != "" %} letter-spacing: {{settings[tSpacing]}}; {% endif %}        
+          {% if settings[t2Color] != "" %} color: {{settings[tColor]}}; {% endif %}  
+          {% if settings[t2size] != "" %} font-size: {{settings[tsize]}}; {% endif %}
+          {% endcapture %} 
+          
+           {% capture tStyle2 %} 
+          {% if settings[tSpacing2] != "" %} letter-spacing: {{settings[tSpacing2]}}; {% endif %}        
+          {% if settings[tColor2] != "" %} color: {{settings[tColor2]}}; {% endif %}  
+          {% if settings[tsize2] != "" %} font-size: {{settings[tsize2]}}; {% endif %}
+          {% endcapture %} 
+
+          {% capture bStyle %}             
+          {% if settings[bColor] != "" %} color: {{settings[bColor]}}; {% endif %}  
+          {% if settings[bsize] != "" %} font-size: {{settings[bsize]}}; {% endif %}
+          {% endcapture %} 
+
+
+          <li data-transition="{{ settings[transition] }}" data-slotamount="7" data-masterspeed="500" data-thumb="{{ thumb | asset_url }}" data-saveperformance="off" data-title="0{{i}}">
+            <img src="{{thumb | asset_url}}" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" alt="" />
+
+            {% if settings[heading] != '' %}
+            <div class="tp-caption {{settings[headingEffect]}} rv-heading" {% if settings[hStyle] != "" %}style="{{hStyle}}" {% endif %} data-x="{{settings[dataX]}}" data-y="{{settings[dataY]}}" data-speed="500" data-start="1000" data-endspeed="500"  data-easing="Linear.easeNone" data-elementdelay="0.1" data-endelementdelay="0.1">
+              {{settings[heading]}}
+            </div>            
+            {% endif %}
+
+            {% if settings[text] != '' %}
+            <div class="tp-caption {{settings[tEffect]}} rv-description" {% if settings[tStyle] != "" %}style="{{tStyle}} text-align: left;" {% endif %} data-x="{{settings[tdataX]}}" data-y="{{settings[tdataY]}}" data-endspeed="500" data-speed="500" data-start="1400" data-easing="Linear.easeNone" data-elementdelay="0.1" data-endelementdelay="0.1">
+              {{ settings[text] }}
+            </div>
+            {% endif %} 
+            
+            {% if settings[text2] != '' %}
+            <div class="tp-caption {{settings[tEffect2]}} rv-description" {% if settings[tStyle2] != "" %}style="{{tStyle2}} font-weight:200; text-transform: none; text-align: left; line-height: 20px;" {% endif %} data-x="{{settings[tdataX2]}}" data-y="{{settings[tdataY2]}}" data-endspeed="500" data-speed="500" data-start="1400" data-easing="Linear.easeNone" data-elementdelay="0.1" data-endelementdelay="0.1">
+              {{ settings[text2] }}
+            </div>
+            {% endif %} 
+			
+            
+           {% if settings[button] != '' %}
+            <a href="{{settings[blink]}}" class="tp-caption {{settings[bEffect]}} rv-button" {% if settings[bStyle] != "" %}style="{{bStyle}}" {% endif %} data-x="{{settings[bdataX]}}" data-y="{{settings[bdataY]}}" data-endspeed="500" data-speed="500" data-start="1700" data-easing="Linear.easeNone" data-elementdelay="0.1" data-endelementdelay="0.1">
+              {{ settings[button] }}
+            </a>
+            {%if settings[show_category]%}
+            <a href="{{settings[url_category]}}" class="tp-caption {{settings[bEffect]}} rv-button btn btn-white btn-outline" {% if settings[bStyle] != "" %}style="{{bStyle}}" {% endif %} data-x="{{settings[category_x]}}" data-y="{{settings[category_y]}}" data-endspeed="500" data-speed="500" data-start="1700" data-easing="Linear.easeNone" data-elementdelay="0.1" data-endelementdelay="0.1">
+              {{ settings[name_category] }}
+            </a>
+            {%endif%}
+            {% endif %}
+          </li>
+          {% endif %}
+
+          {% endfor %}
+
+        </ul>
+      </div>
+    </div>
+
+    {% unless settings.slideshow_fullwidth %}
+  </div>
+  {% endunless %}
+</div>

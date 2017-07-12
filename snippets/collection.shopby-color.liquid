@@ -1,0 +1,25 @@
+<div class="widget filter-custom filter-tag color">
+  {% assign tags = settings.shop_by_tags_1_list_tags | split: ',' %}
+  <h3 class="widget-title"> {{ settings.shop_by_tags_1_title }}<a href="javascript:void(0)" class="clear" style="display:none">clear</a> </h3>
+  <div class="wiget-content">
+    <ul class="colors square">
+      {% for i in (1..10) %}
+      {% capture shop_by_color_text %}shop_by_color_text_{{ i }}{% endcapture %}
+      {% if settings[shop_by_color_text] != blank %}
+      {% assign tag = settings[shop_by_color_text] | strip %} 
+      {% if collection.tags contains tag %} 
+      <li class="li-color"  {% if current_tags contains tag %} class="active" {% endif %}>
+        {% assign tag_value = tag | handleize %}
+        <input type="checkbox" value="{{ tag_value }}" {% if current_tags contains tag %}checked{% endif %}/>
+        <a href="javascript:void(0)" title="{{tag}}">
+          <span class="color {{tag}}"></span>
+        </a>
+      </li>
+      {% endif %}
+      {% endif %}      
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+

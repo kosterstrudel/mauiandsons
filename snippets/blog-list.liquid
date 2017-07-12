@@ -1,0 +1,40 @@
+
+{% for article in blog.articles %}
+
+<article class="post">
+  <div class="entry-media">
+    <div class="entry-video">
+      <img src="{% if article.image %}{{ article | img_url: 'grande' }}{% endif %}" alt="">
+      <span class="play-button" aria-label="Play" ></span>
+    </div><!-- /.entry-video -->
+  </div><!-- /.entry-media -->
+
+  <div class="entry-summary">
+    <div class="entry-datetime">
+      <a href="{{article.url}}" title="">
+        <span class="entry-day">{{article.published_at | date: " %d" }}</span>
+        <span class="entry-month">/{{article.published_at | date: " %b" }}</span>
+      </a>
+    </div><!-- /.entry-datetime -->
+
+    <div class="entry-title">
+      <h2><a href="{{article.url}}" title="">{{article.title}}</a></h2>
+    </div><!-- /.entry-title -->
+
+    <div class="entry-excerpt">
+      <p>{{ article.content | strip_html | truncatewords: 45 }}</p>
+    </div><!-- /.entry-excerpt -->
+
+    <div class="entry-meta">
+      <span>{{'blogs.postby'|t}}</span>
+      <strong class="entry-author"><a href="{{article.url}}" title="">{{article.author}} </a></strong>
+      <span>-</span>
+
+      <span class="entry-comment-count"><a href="{{article.url}}" title="">{{article.comments_count}} {{'blogs.comment'|t}}</a></span>
+    </div><!-- /.entry-meta -->
+  </div><!-- /.entry-summary -->
+</article><!-- /.post -->
+
+
+{%endfor%}
+

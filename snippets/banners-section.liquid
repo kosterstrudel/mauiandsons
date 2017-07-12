@@ -1,0 +1,39 @@
+
+<section>
+  <div class="container">
+    {% capture img1 %}image_banner_1.jpg{% endcapture %}
+    {% capture img2 %}image_banner_2.jpg{% endcapture %}
+    {% capture url1 %}image_banner_url_1{% endcapture %}
+    {% capture url2 %}image_banner_url_2{% endcapture %}
+    {% capture img3 %}image_banner_3.jpg{% endcapture %}
+    {% capture url3 %}image_banner_url_3{% endcapture %}
+    <div class="row">
+      <div class="col-md-4 col-sm-4">
+        <div class="awe-media margin-bottom-20">
+          <div class="awe-media-image img_ef1">
+            <a href="{{settings[url1]}}">{{ img1| asset_url|img_tag: settings[url1] }}</a>
+          </div>
+        </div><!-- /.awe-media -->
+      </div>
+
+      <div class="col-md-4 col-sm-4">
+        <div class="awe-media margin-bottom-20">
+          <div class="awe-media-image img_ef1">
+            
+              <a href="{{settings[url2]}}">{{ img2| asset_url |img_tag: settings[url2]}}</a>
+           
+          </div><!-- /.awe-media -->
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <div class="awe-media margin-bottom-20">
+          <div class="awe-media-image img_ef1">
+            
+              <a href="{{settings[url3]}}">{{ img3| asset_url |img_tag: settings[url3]}}</a>
+           
+          </div><!-- /.awe-media -->
+        </div>
+      </div>
+    </div><!-- /.row -->
+  </div><!-- /.container -->
+</section><!-- /section -->

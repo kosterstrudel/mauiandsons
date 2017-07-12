@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+  <title>
+    {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+  {% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}" />
+  {% endif %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="icon" href="{{'favicon.png'| asset_url}}" type="image/png" sizes="16x16">
+
+
+  <!--[if lt IE 9]>
+{{ '//html5shiv.googlecode.com/svn/trunk/html5.js' | script_tag }}
+<![endif]-->
+  <!-- Slider -->
+  {{ 'slider.css' | asset_url | stylesheet_tag }}
+  <!-- Fonts -->
+  {{ 'fonts.css' | asset_url | stylesheet_tag }}
+
+
+  <!-- build:css css/bootstrap.css -->
+  {{ 'bootstrap.scss.css' | asset_url | stylesheet_tag }}
+
+  <!-- endbuild -->
+
+  <!-- build:css css/plugins.css -->
+  {{ 'awe-icon.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'owl.carousel.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'awemenu.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'swiper.scss.css' | asset_url | stylesheet_tag }}
+
+
+  {{ 'swatch.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'nanoscroller.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'custom-review.scss.css' | asset_url | stylesheet_tag }}
+  <!-- endbuild -->
+
+  <!-- build:css css/styles.css -->
+  {{ 'awe-background.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'main.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'update.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'docs.scss.css' | asset_url | stylesheet_tag }}
+
+  <!-- endbuild -->
+  {{ 'engo.scss.css' | asset_url | stylesheet_tag }}
+  {%if settings.loading-icon%}
+  {{ 'jpreloader.css' | asset_url | stylesheet_tag }}
+  {%endif%}
+  <!--    -->
+  <!-- build:js js/vendor.js -->
+  {{ 'jquery-1.11.3.min.js' | asset_url | script_tag }}
+  {{ 'awemenu.min.js' | asset_url | script_tag }}
+  {{ 'headroom.min.js' | asset_url | script_tag }}
+  {{ 'api.jquery.js' | shopify_asset_url | script_tag }}
+  {{ 'jpreloader.js' | asset_url | script_tag }}
+  {{ 'custom.js' | asset_url | script_tag }}
+  {{ 'custom.css' | asset_url | stylesheet_tag }}
+
+
+
+  {% if template contains 'contact' or settings.footer_style == 'style5' %}
+  <script type="text/javascript" src="https://maps.google.com/maps/api/js"></script>
+  {{ 'gmaps.min.js' | asset_url | script_tag }}
+  {%endif%}
+
+  {{ 'modernizr-2.8.3.min.js' | asset_url | script_tag }}
+  {{ 'plugins.min.js' | asset_url | script_tag }}
+  {{ 'owl.carousel.min.js' | asset_url | script_tag }}
+
+  <!-- slider   -->
+  {% if template contains 'index' %}
+  {{ "jquery.themepunch.tools.min.js" | asset_url | script_tag }}
+  {{ "jquery.themepunch.revolution.min.js" | asset_url | script_tag }}
+  {{ "revolution.js" | asset_url | script_tag }}
+  {%endif%}
+  {% include 'head_scripts' %}
+
+
+  <!-- slider   -->
+  {% if template contains 'customers' %}
+  {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+  {{ "customer_area.js"  | shopify_asset_url | script_tag }}
+  {% endif %}
+
+  {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+  {{ 'linked-options.js' | asset_url | script_tag }}
+  <!-- endbuild -->
+
+  <script>window.SHOW_LOADING = false;</script>
+  {{ content_for_header }}
+
+</head>
+
+<body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+  {%if settings.loading-icon%}
+  <div id="awe-page-loading">
+    <div class="awe-loading-wrapper">
+      <div class="awe-loading-icon">
+        {%if settings.loading-icon%}
+        <span class="icon">
+          <img src="{{'loading-icon.png'| asset_url}}" alt=""?/>
+        </span>
+        {%else%}
+        <span class="icon icon-logo"></span>
+        {%endif%}      
+      </div>    
+    </div>
+  </div>
+  {%endif%}
+  {%include 'header'%}
+  <main class="wrapper main-content {%if settings.header_style == "style5"%}fix-header-style5{%endif%}">       
+    {{ content_for_layout }}   
+  </main>
+  {%include 'footer'%}
+
+
+  <div class="quickview-product engo-popup"></div>
+  {{ 'engo.js' | asset_url | script_tag }}
+  {% include 'linked-options' %}
+  {% include 'quickview-template' %}
+  {% include 'template-popup' %} 
+  {% if template contains 'index' %}
+  {% if settings.show_popup_newletter%}
+  {% include 'popup' %}
+  {%endif%}
+  {%endif%}
+  {{ 'lib.js' | asset_url | script_tag }}
+  {{ 'quickview.js' | asset_url | script_tag }}
+  {{ 'wishlist.js' | asset_url | script_tag }}
+  {{ 'collection.js' | asset_url | script_tag }}
+
+  {{ 'jquery-ui.min.js' | asset_url | script_tag }}
+  <script>$.widget.bridge('uitooltip', $.ui.tooltip);</script>
+
+  <!-- build:js js/plugins.js -->
+  {{ 'bootstrap.min.js' | asset_url | script_tag }}
+  {{ 'hideshowpassword.min.js' | asset_url | script_tag }}
+
+  {{ 'jquery.nanoscroller.min.js' | asset_url | script_tag }}
+  {{ 'swiper.min.js' | asset_url | script_tag }}
+
+
+  {{ 'masonry.pkgd.min.js' | asset_url | script_tag }}
+  {{ 'isotope.pkgd.min.js' | asset_url | script_tag }}
+  {{ 'imagesloaded.pkgd.min.js' | asset_url | script_tag }}
+    {{ 'instafeed.min.js' | asset_url | script_tag }} 
+  <!-- endbuild -->
+
+  <!-- build:js js/main.js -->
+  {{ 'awe-carousel-branch.js' | asset_url | script_tag }}
+  {{ 'awe-carousel-blog.js' | asset_url | script_tag }}
+  {{ 'awe-carousel-products.js' | asset_url | script_tag }}
+  {{ 'awe-carousel-testimonial.js' | asset_url | script_tag }}
+
+  {{ 'awe-hosoren.js' | asset_url | script_tag }}
+  {{ 'main.js' | asset_url | script_tag }}
+  <!-- endbuild -->
+
+  <!-- build:js js/docs.js -->
+  {{ 'list.min.js' | asset_url | script_tag }}
+  {{ 'docs.js' | asset_url | script_tag }}
+  <!-- endbuild -->
+  {% include 'currencies' %}
+  <script type="text/javascript">
+    $('.footer .widget-title').append('<i class="fa fa-plus-square"></i>')
+    $('.footer .widget-title i').click(function(){
+      var ct=$(this).parents('.widget').find('ul ,.widget-content');
+      if(!ct.hasClass('active')){
+        ct.addClass("active");
+      }
+      else{
+        ct.removeClass("active");
+      }
+    });
+
+    jQuery(function() {
+      jQuery('.swatch :radio').change(function() {
+        var optionIndex = jQuery(this).closest('.swatch').attr('data-option-index');
+        var optionValue = jQuery(this).val();
+        jQuery(this)
+        .closest('form')
+        .find('.single-option-selector')
+        .eq(optionIndex)
+        .val(optionValue)
+        .trigger('change');
+      });
+    });
+
+    $('.awemenu').addClass('dqq');
+    $('.main-slider').addClass('dqq');
+
+    {%if settings.loading-icon%}
+    //calling jPreLoader
+    $('body').jpreLoader({
+      splashID: "#awe-page-loading",
+      loaderVPos: '50%',
+      autoClose: true,    
+      splashFunction: function() {  
+        //passing Splash Screen script to jPreLoader
+        $('#awe-page-loading').children('section').not('.selected').hide();
+        $('#awe-page-loading').hide().fadeIn(900);
+        $('#awe-page-loading img').show();
+      }
+
+    });
+
+    $(document).ready( function() {
+        $('.home12-testimonial .section-customers .owl-carousel .owl-item img').attr("src","http://i.imgur.com/0zOd4pQ.png");
+        $('#awe-page-loading').fadeOut(2000);
+    });
+    {%endif%}
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+
+<div class="container">
+  <div class="row ">
+    <div class="col-md-12 col-sm-6 center padding-bottom-20">
+      <img alt="" src="{{'footer_logo.png'|asset_url}}">
+    </div>
+
+
+    <div class="col-md-12 col-sm-6 center padding-bottom-20">
+      <div class="widget-content help-info">
+        {{settings.help_info_content}}
+      </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12 borderfooter">
+      <div class="row margin-top-30 ">
+      <div class="col-md-7">
+        {% if settings.newsletter_form_action != blank %}
+      {% assign form_action = settings.newsletter_form_action %}
+      {% else %}
+      {% assign form_action = '//myshopify.us12.list-manage.com/subscribe/post?u=9ade7b39da179308b891bd263&amp;id=e9dbec7f92' %}
+      {% endif %}
+      {%assign newletter_title= settings.newletter_title %}
+      {%assign newletter_des= settings.newletter_des %}
+      {%assign newletter_button= settings.newletter_button %}
+      {%assign newletter_input= settings.newletter_input %}
+      {%if newletter_title != ""%}
+        <div class="row margin-bottom-15">
+          <div class="col-md-4">
+         <h3 class="title-newsletter margin-top-10 ">{{'subscible.subscible_newsleter'|t}}</h3>
+          </div>
+          <div class="col-md-8">
+            
+        		<form action="{{ form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank"  class="subscible-form">
+              <div class="row">
+                  <div class="col-md-8 col-sm-8 form-group inline-block">
+
+                    <input  class="form-control gray" type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{newletter_input}}" name="EMAIL" id="mail" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
+                  </div>
+
+                  <div class="col-md-4 col-sm-4 submit inline-block">
+                    <input type="submit" class="btn btn-lg btn-primary"  name="subscribe" id="subscribe" value="{{newletter_button}}">
+                  </div>
+             </div>
+            </form>
+            
+          </div>
+        </div>
+        {%endif%}
+        
+      </div>
+        <div class="footerv3 col-md-4 col-md-push-1 center">
+          <ul class="list-socials social border-rightf">
+            {{settings.footer_social_content}}
+          </ul>
+          <ul class="list-socials">
+          {{settings.footer_payment_content}}
+        </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

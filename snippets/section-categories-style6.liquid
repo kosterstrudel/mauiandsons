@@ -1,0 +1,101 @@
+{% assign col1 = settings.category_1_collection %}
+{% assign col2 = settings.category_2_collection %}
+{% assign col3 = settings.category_3_collection %}
+{%assign category_title = settings.category_title%}
+{%assign category_subtitle = settings.category_subtitle%}
+
+{%capture collection_1%}category_1_collection{%endcapture%}
+{%capture category_title_1 %}category1_title{%endcapture%}
+{%capture category_subtitle_1 %}category1_subtitle{%endcapture%}
+{%capture category_img_1%}category1_img.jpg{%endcapture%}
+{%capture category_img2_1%}category1_img_2.jpg{%endcapture%}
+{%capture category_url_1%}category1_url{%endcapture%}
+
+{%capture collection_2%}category_2_collection{%endcapture%}
+{%capture category_title_2 %}category2_title{%endcapture%}
+{%capture category_subtitle_2 %}category2_subtitle{%endcapture%}
+{%capture category_img_2%}category2_img.jpg{%endcapture%}
+{%capture category_img2_2%}category2_img_2.jpg{%endcapture%}
+{%capture category_url_2%}category2_url{%endcapture%}
+
+{%capture collection_3%}category_3_collection{%endcapture%}
+{%capture category_title_3 %}category3_title{%endcapture%}
+{%capture category_subtitle_3 %}category3_subtitle{%endcapture%}
+{%capture category_img_3%}category3_img.jpg{%endcapture%}
+{%capture category_img2_3%}category3_img_2.jpg{%endcapture%}
+{%capture category_url_3%}category3_url{%endcapture%}
+{%assign products_limit = '9'%}
+<div class="cate-style-2">
+  <div class="section-header center">
+    <h2 class="margin-bottom-20">{{category_title}}</h2>
+    <p>{{category_subtitle}}</p>
+  </div><!-- /.section-header -->
+
+        <div class="cate4-wrapper">
+            <div class="row margin-bottom-40">
+              	<div class="col-md-6">
+                    {{ category_img_1 | asset_url | img_tag: settings[category_title_1]|medium }}
+         
+                </div>
+              
+                <div class="center content col-md-6 padding-left-60 padding-right-60">
+                    <h2 class="padding-top-30">
+                        {{settings[category_title_1]}}
+                    </h2>
+
+                    <p class="lineheight2 padding-bottom-40">{{settings[category_subtitle_1]}}</p>
+                  <div class="center">
+                  {{ category_img2_1 | asset_url | img_tag: settings[category_title_1]|medium }}
+                  </div>
+                    <a href="{{settings[category_url_1]}}" class="btn btn-lg btn-dark btn-outline margin-top-40">{{'collections.view_all_category'|t}}</a>
+
+                </div>
+
+                
+            </div><!-- /.cate-section-trait -->
+
+            <div class="row  margin-bottom-40">
+                
+              <div class="col-md-6 col-md-push-6">
+                    {{ category_img_2 | asset_url | img_tag: settings[category_title_2]|medium }}
+         
+                </div>
+              
+              <div class="center content col-md-6 col-md-pull-6 padding-right-60 padding-left-60">
+                     <h2 class=" padding-top-30">
+                        <span>{{settings[category_title_2]}}</span>
+                    </h2>
+
+                    <p class=" lineheight2 padding-bottom-40">{{settings[category_subtitle_2]}}</p>
+                <div class="center">
+					{{ category_img2_2 | asset_url | img_tag: settings[category_title_2]|medium }}
+                </div>
+                    <a href="{{settings[category_url_2]}}" class="btn btn-lg btn-dark btn-outline margin-top-40 ">{{'collections.view_all_category'|t}}</a>
+
+                </div>
+
+            </div><!-- /.cate-section-trait -->
+
+            <div class="row  margin-bottom-40">
+                <div class="col-md-6">
+                    {{ category_img_3 | asset_url | img_tag: settings[category_title_3]|medium }}
+         
+                </div>
+            
+                <div class="center content col-md-6  padding-left-60 padding-right-60">
+                    <h2 class="padding-top-30">
+                        {{settings[category_title_3]}}
+                    </h2>
+
+                    <p class="lineheight2 padding-bottom-40">{{settings[category_subtitle_3]}}</p>
+                  <div class="center">
+					{{ category_img2_3 | asset_url | img_tag: settings[category_title_3]|medium }}
+                  </div>
+                    <a href="{{settings[category_url_3]}}" class="btn btn-lg btn-dark btn-outline margin-top-40">{{'collections.view_all_category'|t}}</a>
+
+                </div>
+
+                
+            </div><!-- /.cate-section-trait -->
+        </div>
+ </div>

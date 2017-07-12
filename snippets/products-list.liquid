@@ -1,0 +1,10 @@
+<div class="products products-grid-wrapper">
+  <div class="row">
+    {% for product in collection.products %}
+    <div class="col-md-12 product-wrap">
+      {% include "product-list" %}
+    </div>
+    
+    {% endfor %}
+  </div><!-- /.row -->
+</div><!-- /.products -->

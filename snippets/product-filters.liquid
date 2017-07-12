@@ -1,0 +1,102 @@
+<div class="product-header-actions">
+  <div  class="form-inline " >
+    <div class="row">
+      <div class="col-md-4 col-sm-6">
+
+        <div class="view-icons view-mode">
+          <a href="javascript:void(0)" data-mode="grid" class="view-icon active grid"><span class="icon icon-th"></span></a>
+          <a href="javascript:void(0)" data-mode="list" class="view-icon list"><span class="icon icon-th-list"></span></a>
+        </div>
+
+        <div class="view-count">
+          <p class="text-muted">
+            <span {% if settings.enable_multilang %}data-translate="collections.toolbar.showing"{% endif %}>{{ 'collections.toolbar.item' | t }}</span> 
+            {{ paginate.current_offset | plus: 1 }} {{ 'collections.toolbar.to' | t }}
+            {% if paginate.next %}
+            {{ paginate.current_offset | plus: paginate.page_size }}
+            {% else %}
+            {{ paginate.items }}
+            {% endif %}
+            <span {% if settings.enable_multilang %}data-translate="collections.toolbar.of"{% endif %}>{{ 'collections.toolbar.of' | t }}</span>
+            {{ paginate.items }}
+            {{ 'collections.toolbar.items' | t }}
+          </p>
+
+        </div>
+      </div>
+
+      <div class="col-md-8 col-sm-6 col-xs-12">
+        <div class="form-show-sort">
+          {% if settings.collection_results_per_page != blank %}
+          {% assign product_per_page = settings.collection_results_per_page %}
+          {% else %}
+          {% assign product_per_page = 12 %}
+          {% endif %}
+          {% assign current_page_size = paginate.page_size %}
+
+          <div class="form-group pull-left collection-show" role="menu">
+            <div class="dropdown">
+               <label >{{'filter.show'|t}}</label>
+              <button class="dropdown-toggle">  
+                <span class="dropdown-label">{{ current_page_size }}</span>     
+              </button>
+              <ul class="dropdown-content dropdown-menu">
+                <li {% if current_page_size == 12 %} class="active" {% endif %}><a href="{{ product_per_page }}">{{ product_per_page }}</a></li>
+                <li {% if current_page_size == 24 %} class="active" {% endif %}><a href="24">24</a></li>
+                <li {% if current_page_size == 36 %} class="active" {% endif %}><a href="36">36</a></li>
+
+              </ul>
+               <strong>{{'filter.per_page'|t}}</strong>
+            </div>
+          </div>
+
+
+          <div class="collection-sorting form-horizontal form-group pull-right text-right">
+            <div class="dropdown">
+              <label >{{ 'collections.sorting.title' | t }}</label>
+              <button class="dropdown-toggle">      
+                <span class="dropdown-label">{{ 'collections.sorting.featured' | t }}</span>     
+              </button>
+              <ul class="dropdown-content dropdown-menu">
+                <li class="active"><a href="manual">{{ 'collections.sorting.featured' | t }}</a></li>   
+                <li><a href="best-selling">{{ 'collections.sorting.best_selling' | t }}</a></li>
+                <li><a href="title-ascending">{{ 'collections.sorting.az' | t }}</a></li>
+                <li><a href="price-descending">{{ 'collections.sorting.price_descending' | t }}</a></li>
+                <li><a href="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</a></li>
+                <li><a href="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</a></li>
+                <li><a href="created-descending">{{ 'collections.sorting.date_descending' | t }}</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <script>
+            /*============================================================================
+              Inline JS because collection liquid object is only available
+              on collection pages, and not external JS files
+            ==============================================================================*/
+            Shopify.queryParams = {};
+            if (location.search.length) {
+              for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+                aKeyValue = aCouples[i].split('=');
+                if (aKeyValue.length > 1) {
+                  Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+                }
+              }
+            }
+
+            $(function() {
+              $('#SortBy')
+              .val('{{ collection.sort_by | default: collection.default_sort_by }}')
+                   .bind('change', function() {
+                Shopify.queryParams.sort_by = jQuery(this).val();
+                location.search = jQuery.param(Shopify.queryParams);
+              }
+              );
+            });
+          </script>
+
+        </div>
+      </div>
+    </div><!-- /.row -->
+  </div>
+</div><!-- /.product-header-actions -->

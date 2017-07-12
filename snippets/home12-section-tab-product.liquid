@@ -1,0 +1,57 @@
+<section>
+  <div class="container">
+
+      <div class="arrivals">
+        <div class="section-header center">
+          <h2>{{settings.sec_tab_1_title_1}}</h2>
+        </div><!-- /.section-header -->
+
+        <ul class="section-link" role="tablist">
+          {%for i in (1..5)%}
+          {%capture enable%}sec_tab_1_{{i}}{%endcapture%}
+          {%capture title%}sec_tab_1_{{i}}_title{%endcapture%}
+          {%capture col%}sec_tab_1_{{i}}_col{%endcapture%}
+          {%if settings[enable]%}
+          <li role="presentation" {%if forloop.index == 1%}class="active"{%endif%}><a href="#{{collections[settings[col]].handle}}" aria-controls="home" role="tab" data-toggle="tab">{{settings[title]}}</a></li>
+          {%endif%}
+          {%endfor%}
+
+
+        </ul>
+        {% assign col = settings.collection_featured_item %}
+        <div class="tab-content">
+
+          {%for i in (1..5)%}
+          {%capture enable%}sec_tab_1_{{i}}{%endcapture%}
+          {%capture col%}sec_tab_1_{{i}}_col{%endcapture%}
+          {%if settings[enable]%}
+          <div role="tabpanel" class="tab-pane {%if forloop.index == 1%}active{%endif%}" id="{{collections[settings[col]].handle}}">
+            <div class="products scroll">
+            <div class="row">
+              {% for product in collections[settings[col]].products limit: 8 %}
+              <div class="col-md-3 col-sm-6 col-xs-6">
+              {% include 'product-grid' %}
+              </div>
+              {%else%}
+            
+              {%include 'product-grid-sample-3'%}
+        
+              {% endfor %}
+            </div><!-- /.products -->
+            </div>
+            <div class="center">
+            <a href="{{collections[settings[col]].url}}" class="btn btn-lg btn-dark btn-outline">
+          <span>{{'list_collection.view_more'|t}}</span>
+        </a>
+        </div><!-- /.margin-top-50 -->
+          </div>
+          
+          {%endif%}
+          {%endfor%}
+
+        </div>
+      </div><!-- /.arrivals -->
+
+  </div><!-- /.container -->
+</section><!-- /section -->
+

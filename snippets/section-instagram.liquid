@@ -1,0 +1,41 @@
+  {% assign instafeed_img = '{{image}}' %}
+{% assign instafeed_link = '{{link}}' %}
+  {% assign instafeed_like = '{{likes}}' %}
+{% assign instafeed_comment = '{{comments}}' %}
+<script>
+  jQuery(document).ready(function($) {
+
+    var feed = new Instafeed({
+      get: 'user',
+      userId: '{{settings.section_ins_userid}}',
+      accessToken: '{{settings.section_ins_access_token}}',
+      template: '<div class="col-md-3 col-sm-3 col-xs-6 margin-bottom-30"><div class="awe-media home-cate-media"><div class="awe-media-header insta"><img src="{{instafeed_img}}" alt="" class="imgcenter"><a href="{{instafeed_link}}"><div class="awe-media-overlay2  fullpage"><div class="content insta-content"><div class="fp-table "><div class="fp-table-cell center"><i class="fa fa-heart" aria-hidden="true"><span class="margin-left-5">{{instafeed_like}}</span></i><i class="fa fa-comment" aria-hidden="true"><span class="margin-left-5">{{instafeed_comment}}</span></i></div></div></div></div></a></div></div></div>',
+      target: 'instagram',
+      resolution: 'standard_resolution',
+      limit: '8',
+      sortBy:'{{settings.section_ins_sort}}'
+
+    });
+    feed.run();
+
+  }); 
+</script>
+<section>
+  <div class="container padding-bottom-20">
+    {%capture instagram_title%}title_instagram{%endcapture%}
+{%capture instagram_subtitle%}subtitle_instagram{%endcapture%}
+
+<div class="home-trending">
+  <div class="section-header center">
+    <h2 class="upper margin-bottom-20">{{settings[instagram_title]}}</h2>
+    <p>{{settings[instagram_subtitle]}}</p>
+  </div><!-- ./section-header -->
+
+</div><!-- /.home-trending -->
+    
+   <div class="row" id="instagram">
+    
+  </div>
+
+  </div><!-- /.container -->
+</section><!-- /section -->

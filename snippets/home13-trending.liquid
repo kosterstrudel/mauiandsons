@@ -1,0 +1,47 @@
+
+<section class="home13-trending">
+  <div class="container">
+    {%capture trending_title%}trending4_title{%endcapture%}
+{%capture trending_subtitle%}trending4_subtitle{%endcapture%}
+
+<div class="home-trending margin-bottom-50">
+  <div class="section-header center">
+    <h2 class="upper margin-bottom-20">{{settings[trending_title]}}</h2>
+    <p>{{settings[trending_subtitle]}}</p>
+  </div><!-- ./section-header -->
+
+  <div class="row">
+	{% for i in (1..3) %}
+      {%capture trending_url%}trending4_{{i}}_url{%endcapture%}
+      {%capture trending_img%}trending4_img_{{i}}.jpg{%endcapture%}
+      {%capture trending_title_item%}trending4_{{i}}_title{%endcapture%}
+    {%capture trending_subtitle_item%}trending4_{{i}}_subtitle{%endcapture%}
+    {%capture trending_button%}trending4_{{i}}_button{%endcapture%}
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="awe-media">
+        <div class="awe-media-image img_ef1">
+          <a href="{{settings[trending_url]}}" title="{{settings[trending_title_item]}}">
+             {{trending_img|asset_url|img_tag: settings[trending_url]}}
+          </a>
+        </div><!-- /.awe-media-image -->
+
+        <div class="awe-media-body center margin-vertical-20">
+          
+          <h4>{{settings[trending_title_item]}}</h4>
+          <p>{{settings[trending_subtitle_item]}}</p>
+
+         <a href="" class="btn btn-lg btn-dark btn-outline">
+          <span data-theme-editor-setting="brand_button">{{settings[trending_button]}}</span>
+        </a>
+
+        </div><!-- /.awe-media-body -->
+      </div><!-- /.awe-media -->
+    </div>
+
+    {%endfor%}
+
+  </div><!-- /.row -->
+</div><!-- /.home-trending -->
+
+  </div><!-- /.container -->
+</section><!-- /section -->

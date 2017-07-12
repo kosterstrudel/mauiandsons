@@ -1,0 +1,141 @@
+{% assign main_menu = settings.main_menu%}
+{% for link in linklists[main_menu].links %}
+{% assign item = link.title | downcase %}
+{% assign child_list_handle = link.title | handleize %}
+{% if linklists[child_list_handle].links != blank %}
+<li class="awemenu-item">
+  <a href="{{ link.url }}">
+    <span> {{ link.title }}</span>
+  </a>
+
+  {%capture megamenu1%}meg1_parent{%endcapture%}
+  {%capture megamenu2%}meg2_parent{%endcapture%}
+  {%for i in (1..2) %} 
+
+  {%capture megamenu%}meg{{i}}_parent{%endcapture%}
+
+  {%capture mega_title%}meg{{i}}_title{%endcapture%}
+  {%capture mega_url%}meg{{i}}_url{%endcapture%}
+
+  {%capture mega_col_1%}meg{{i}}_col_1_menu{%endcapture%}
+  {%capture mega_col_2%}meg{{i}}_col_2_menu{%endcapture%}
+  {%capture mega_col_3%}meg{{i}}_col_3_menu{%endcapture%}
+
+  {%capture mega_col_4_title_1%}meg{{i}}_col_4_title1{%endcapture%}
+  {%capture mega_col_4_title_2%}meg{{i}}_col_4_title2{%endcapture%}
+
+  {%capture mega_col_4_url_1%}meg{{i}}_col_4_url_1{%endcapture%}
+  {%capture mega_col_4_url_2%}meg{{i}}_col_4_url_2{%endcapture%}
+
+  {%capture  mega_img_1 %}meg{{i}}_img_1.jpg {%endcapture%}
+  {%capture  mega_img_2 %}meg{{i}}_img_2.jpg {%endcapture%}
+
+  {% if settings[megamenu] == item %}
+  <ul class="awemenu-submenu awemenu-megamenu" data-width="1170" data-animation="faderight">
+    <li class="awemenu-megamenu-item">
+      <div class="container-fluid">
+        <div class="awemenu-megamenu-wrapper">
+
+          <div class="row">
+            <div class="col-lg-3">
+              <h2 class="upper">{{ link.title }}</h2>
+              <ul class="super">
+                {% for link in linklists[settings[mega_col_1]].links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+
+              </ul>
+            </div>
+
+            <div class="col-lg-3">
+              <ul class="sublist">
+                {% for link in linklists[settings[mega_col_2]].links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+
+            <div class="col-lg-3">
+              <ul class="sublist">
+                {% for link in linklists[settings[mega_col_3]].links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+
+            <div class="col-lg-3">
+              <div class="awe-media inline margin-bottom-25">
+                <div class="awe-media-image">
+                  <a href="{{settings[mega_col_4_url_1]}}" title="">
+                    {{ mega_img_1 | asset_url | img_tag: settings[mega_col_4_title_1] }}
+                  </a>
+                </div>
+                <h4 class="awe-media-title medium upper center">
+                  <a href="{{mega_col_4_url_1}}" title="">{{settings[mega_col_4_title_1]}}</a>
+                </h4>
+              </div>
+
+              <div class="awe-media inline">
+                <div class="awe-media-image">
+                  <a href="{{settings[mega_col_4_url_1]}}" title="">
+                    {{ mega_img_2 | asset_url | img_tag: settings[mega_col_4_title_2] }}
+                  </a>
+                  <div class="awe-media-overlay overlay-dark-50 fullpage">
+                    <div class="fp-table">
+                      <div class="fp-table-cell center">
+                        <a href="{{settings[mega_col_4_url_2]}}" class="btn btn-white">Show now</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <h4 class="awe-media-title medium upper center">
+                  <a href="{{settings[mega_col_4_url_2]}}" title="">{{settings[mega_col_4_title_2]}}</a>
+                </h4>
+              </div>
+            </div>
+          </div>
+
+         <div class="bottom-link">
+            <a href="{{settings[mega_url]}}" class="btn btn-lg btn-dark btn-outline">
+              <span>Shop All {{link.title}}</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </li>
+  </ul>
+   {%endif%}
+  {%endfor%}
+ {%unless settings[megamenu1] == item %}
+  {%unless settings[megamenu2] == item %}
+
+  <ul class="awemenu-submenu awemenu-one-col" data-width="250px" data-animation="fadeup">
+    <li class="awemenu-megamenu-item">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <ul class="list-unstyled">
+              {% for childlink in linklists[child_list_handle].links %}
+              <li>
+                <a class="awemenu-item one-col-item" href="{{ childlink.url }}" >{{ childlink.title | escape }}</a>              
+              </li>
+              {% endfor %}
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  {%endunless%}
+  {%endunless%}
+</li>
+{% else %}
+<li class="awemenu-item">
+  <a href="{{ link.url }}">
+    <span> {{ link.title }}</span>
+  </a>  
+</li>
+{% endif %}
+{% endfor %} 

@@ -1,0 +1,45 @@
+
+<section class="home12-brand" >
+<div class="section-brands">
+    <div class="container">
+      <div class="section-header center">
+        <h2 class="upper margin-bottom-20">{{settings.home_brand_carousel_title}}</h2>
+      </div><!-- ./section-header -->
+      <div class="awe-media home-cate-media">
+          <div class="awe-media-header">
+            <div class="awe-media-image">
+              <a href="{{settings.brand_url}}">
+              <img src="{{'banner_brand.jpg'|asset_url}}" alt="">
+              </a>
+            </div><!-- /.awe-media-image -->
+
+          </div><!-- /.awe-media-header -->
+        </div><!-- /.awe-media -->
+      <div class="brands-carousel owl-carousel" id="brands-carousel">
+        {% for i in (1..10) %}
+        {% capture _enable %}home_brand_carousel_enable_{{ i }}{% endcapture %}
+        {% capture _icon %}home_brand_logo_{{ i }}.png{% endcapture %}
+        {% capture _url %}home_brand_carousel_url_{{ i }}{% endcapture %}   
+        {% assign enable = settings[_enable] %}
+
+
+        {% if enable %}
+        {% assign url = settings[_url] %}
+
+
+        <div class="center">
+          <a class="{{url}}" href="{{url}}" title="">{{ _icon | asset_url | img_tag }}</a> 
+        </div><!-- /.center -->
+        {% endif %}
+        {% endfor %}
+      </div><!-- /.brands-carousel -->
+      {%if settings.brand_button != blank %}
+      <div class="center margin-top-20">
+            <a href="{{settings.brand_url}}" class="btn btn-lg btn-dark btn-outline">
+          <span>{{settings.brand_button}}</span>
+        </a>
+        </div><!-- /.margin-top-50 -->
+      {%endif%}
+    </div><!-- /.container -->
+  </div><!-- /.section-brands -->
+</section>

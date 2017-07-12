@@ -1,0 +1,20 @@
+
+<div class="policy-header">
+
+  {% for i in (1..3) %}
+  {% capture policy_img %}policy_{{ i }}.png{% endcapture %}      
+  {% capture policy_title %}policy_{{ i }}_title{% endcapture %}  
+  {% capture policy_des %}policy_{{ i }}_des{% endcapture %}  
+  <div class="policy">
+    <div class="policy-icon">
+      {{ policy_img | asset_url | img_tag: settings[policy_title] }}
+    </div>
+
+    <div class="policy-text">
+      <h4>{{ settings[policy_title] }}</h4>
+      <p>{{ settings[policy_des] }}</p>
+    </div>
+  </div><!-- /.policy -->
+
+  {%endfor%}
+</div>

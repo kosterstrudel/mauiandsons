@@ -1,0 +1,11 @@
+
+<div class="widget widget_categories">
+  <h3 class="widget-title">{{settings.blog_sidebar_category_title}}</h3>
+
+  <ul>
+    {% for collection in collections %}      
+      <li ><a {% if collection_title == collection.title %}class="active" {% endif %} href="{{ collection.url }}" title="{{ collection.title }}">{{ collection.title }}<span class="count">({{ collection.all_products_count }})</span></a></li>   
+      {% endfor %}
+  </ul>
+</div>
+

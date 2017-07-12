@@ -1,0 +1,93 @@
+{% assign col1 = settings.category_1_collection %}
+{% assign col2 = settings.category_2_collection %}
+{% assign col3 = settings.category_3_collection %}
+{%assign category_title = settings.category_title%}
+{%assign category_subtitle = settings.category_subtitle%}
+
+{%capture collection_1%}category_1_collection{%endcapture%}
+{%capture category_title_1 %}category1_title{%endcapture%}
+{%capture category_subtitle_1 %}category1_subtitle{%endcapture%}
+{%capture category_img_1%}category1_img.jpg{%endcapture%}
+{%capture category_img2_1%}category1_img2.jpg{%endcapture%}
+{%capture category_url_1%}category1_url{%endcapture%}
+
+{%capture collection_2%}category_2_collection{%endcapture%}
+{%capture category_title_2 %}category2_title{%endcapture%}
+{%capture category_subtitle_2 %}category2_subtitle{%endcapture%}
+{%capture category_img_2%}category2_img.jpg{%endcapture%}
+{%capture category_img2_2%}category2_img.jpg{%endcapture%}
+{%capture category_url_2%}category2_url{%endcapture%}
+
+{%capture collection_3%}category_3_collection{%endcapture%}
+{%capture category_title_3 %}category3_title{%endcapture%}
+{%capture category_subtitle_3 %}category3_subtitle{%endcapture%}
+{%capture category_img_3%}category3_img.jpg{%endcapture%}
+{%capture category_img2_3%}category3_img2.jpg{%endcapture%}
+{%capture category_url_3%}category3_url{%endcapture%}
+{%assign products_limit = '9'%}
+<div class="padding-vertical-50 cate-style-2">
+
+  <div class="section-header center">
+    <h2 class="margin-bottom-20">{{category_title}}</h2>
+    <p>{{category_subtitle}}</p>
+  </div><!-- /.section-header -->
+
+  <div class="cate-section-gutter-wrapper">
+    <div class="row no-gutter ">
+      <div class="col-md-4 col-sm-4 col-xs-6">
+        <div class="cate-section-gutter">
+          <div class="awe-media block">
+            <div class="awe-media-image">
+              <a href="#" title="">
+                {{ category_img_1 | asset_url | img_tag: settings[category_title_1] }}
+              </a>
+            </div>
+          </div>
+
+          <div class="category-text">
+            <h3>{{settings[category_title_1]}}</h3>
+            <p>{{settings[category_subtitle_1]}}</p>
+            <a href="{{settings[category_url_1]}}" title="" class="btn btn-dark btn-outline">{{'collections.view_all'|t}}</a>
+          </div>
+        </div><!-- /.cate-section-gutter -->
+      </div>
+
+      <div class="col-md-4 col-sm-4 col-xs-6">
+        <div class="cate-section-gutter inverse">
+          <div class="category-text">
+            <h3>{{settings[category_title_2]}}</h3>
+            <p>{{settings[category_subtitle_2]}}</p>
+            <a href="{{settings[category_url_2]}}" title="" class="btn btn-dark btn-outline">{{'collections.view_all'|t}}</a>
+          </div>
+
+          <div class="awe-media block">
+            <div class="awe-media-image">
+              <a href="#" title="">
+                {{ category_img_2 | asset_url | img_tag: settings[category_title_2] }}
+              </a>
+            </div>
+          </div>
+        </div><!-- /.cate-section-gutter -->
+      </div>
+
+      <div class="col-md-4 col-sm-4 col-xs-6">
+        <div class="cate-section-gutter">
+          <div class="awe-media block">
+            <div class="awe-media-image">
+              <a href="#" title="">
+                {{ category_img_3 | asset_url | img_tag: settings[category_title_3] }}
+              </a>
+            </div>
+          </div>
+
+          <div class="category-text">
+            <h3>{{settings[category_title_3]}}</h3>
+            <p>{{settings[category_subtitle_3]}}</p>
+            <a href="{{settings[category_url_3]}}" title="" class="btn btn-dark btn-outline">{{'collections.view_all'|t}}</a>
+          </div>
+        </div><!-- /.cate-section-gutter -->
+      </div>
+    </div><!-- /.row -->
+  </div>
+
+</div>

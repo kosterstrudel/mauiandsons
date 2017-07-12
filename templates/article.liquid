@@ -1,0 +1,237 @@
+
+{% if comment and comment.created_at %}
+{% assign number_of_comments = article.comments_count | plus: 1 %}
+{% endif %}
+{% assign number_of_comments = article.comments_count %}
+
+<div class="main-header background "  style="background-image:url({{ 'header_blog_img.jpg' | asset_url }}">
+  <div class="container">
+    <h1>{{settings.blog_title}}</h1>
+  </div>
+</div>
+
+<div class="container">
+  <ol class="breadcrumb margin-bottom-20">
+    <li><a href="#">{{'general.breadcrumbs.home'|t}}</a></li>
+    <li class="active"><span>{{'general.breadcrumbs.blog'|t}}</span></li>
+  </ol>
+</div>
+
+<div class="blog-wrapper blog-detail">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-9 {%if settings.blogstyle == "style1" %}col-md-push-3  {%endif%}  {%if settings.blogstyle == "style3"%}col-centered{%endif%}">
+        <article class="post">
+
+          <div class="entry-media">
+            <div class="entry-feature-image">
+              <img src="{% if article.image %}{{ article | img_url: 'grande' }}{% endif %}" alt="">
+            </div>
+          </div><!-- ./entry-media -->
+
+          <div class="entry-container">
+            <header class="entry-header">
+              <div class="entry-datetime">
+                <span class="entry-day">{{ article.published_at | date: '%d' }}</span>
+                <span class="entry-month">/{{ article.published_at | date: '%b' }}</span>
+              </div>
+
+              <h1 class="entry-title">{{ article.title }}</h1>
+
+              <div class="entry-meta">
+                <span>{{'blog.postby' | t}}</span>
+                <strong class="entry-author"><a href="#" title="">{{article.author}} </a></strong>
+                <span>-</span>
+                <span class="entry-comment-count"><a href="{{article.url}}" title="">{{article.comments_count}} {{'blogs.comment'|t}}</a></span>
+              </div>
+
+            </header><!-- /.entry-header -->
+
+            <div class="entry-content">
+              {{article.content}}
+
+
+            </div><!-- /.entry-content -->
+
+            <footer class="entry-footer">
+              <div class="entry-share">
+                <span class="title">
+                  <span class="margin-right-10">
+                    <i class="fa fa-share-alt"></i>
+                  </span>
+                  <span>Share:</span>
+                </span>
+
+                <ul class="list-socials">
+
+                  {% if template contains 'article' or template contains 'blog' %}
+                  {% capture permalinkURL %}{{ shop.url }}{{ article.url }}{% endcapture %}
+                  {% capture shareTitle %}{{ article.title | url_param_escape }}{% endcapture %}
+                  {% elsif template contains 'product' %}
+                  {% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}
+                  {% capture shareTitle %}{{ product.title | url_param_escape }}{% endcapture %}
+                  {% elsif template == 'password' %}
+                  {% capture permalinkURL %}{{ shop.url }}{% endcapture %}
+                  {% capture shareTitle %}{% unless shop.description == blank %}{{ shop.description | url_param_escape }}{% else %}{{ shop.name | url_param_escape }}{% endunless %}{% endcapture %}
+                  {% endif %}
+
+                  {% comment %}
+                  Share button styles are:
+                  * is-clean
+                  * normal
+                  {% endcomment %}
+                  {% assign shareButtonStyle = 'is-clean' %}
+                  {% if settings.share_twitter %}
+                  <li><a  href="//twitter.com/share?text={{ shareTitle }}&amp;url={{ permalinkURL }}" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                  {% endif %}
+                  {% if settings.share_facebook %}  
+                  <li><a href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" data-toggle="tooltip" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                  {% endif %}
+
+                  {% if settings.share_google %}  
+                  <li><a  href="//plus.google.com/share?url={{ permalinkURL }}" data-toggle="tooltip" title="Google+"><i class="fa fa-google-plus"></i></a></li>
+                  {% endif %}
+                  {% if settings.share_pinterest %}
+                  {% if product.featured_image or article.image %}
+                  <li><a  href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media=http:{% if template contains 'product' %}{{ product | img_url: '1024x1024' }}{% else %}{{ article | img_url: '1024x1024' }}{% endif %}&amp;description={{ shareTitle }}" data-toggle="tooltip" title="Pinterest"><i class="fa fa-pinterest"></i></a></li>
+                  {% endif %}
+                  {% endif %}
+
+
+                </ul>
+
+              </div><!-- /.entry-share -->
+            </footer><!-- /.entry-footer -->
+          </div><!-- /.entry-container -->
+        </article><!-- /.post -->
+
+        <div class="entry-container">
+          <div class="entry-navigation">
+            <div class="row cols-border">              
+              <div class="col-md-6 col-sm-6">
+                <div class="entry-navigation-prev-post">
+                  <div class="entry-navigation-header">
+                    <a href="{{blog.previous_article}}"><span>{{'blog.prev' | t}}</span></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <div class="entry-navigation-next-post">
+                  <div class="entry-navigation-header">
+                    <a href="{{blog.next_article}}"><span>{{'blog.next' | t}}</span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="entry-navigation-button">
+             
+
+              <a href="{{blog.previous_article}}" class="entry-navigation-next">
+                <i class="fa fa-chevron-right"></i>
+              </a>
+               <a href="{{blog.next_article}}" class="entry-navigation-prev">
+                <i class="fa fa-chevron-left"></i>
+              </a>
+            </div>
+          </div><!-- /.entry-navigation -->
+          <!--START COMMENTS-->
+          <div class="">
+            {% if number_of_comments > 0 %}
+            <section id="comments" class="clearfix">
+              <h2 class="reply-comment-title">{{'blog.comment' | t}}</h2>
+
+<!--               {% if comment and comment.created_at %}
+              <div class="comment">
+
+
+                <div class="comment-body">
+                  <h4 class="comment-title">{{ 'blogs.comments.author_meta' | t: author: comment.author, date: comment_date }}</h4>
+                  <p class="comment-text">{{ comment.content }}</p>
+
+                </div>
+              </div>
+              {% endif %} -->
+              {% for comment in article.comments %}
+              <div class="comment">
+                <div class="comment-body">
+                  <h4 class="comment-title">{{ 'blogs.comments.author_meta' | t: author: comment.author, date: comment_date }}</h4>
+                  <p class="comment-text">{{ comment.content }}</p>
+
+                </div>
+              </div>
+              {% endfor %}
+            </section>
+            {% endif %}
+
+          </div>
+
+          <div id="comments" class="comments-area">
+
+            <div id="post-comment" class="reply-comment">
+              {% if comment and comment.created_at %}
+              <p class="success">
+                {% if blog.moderated? %}
+                {{ 'blogs.comments.success_moderated' | t }}
+                {% else %}
+                {{ 'blogs.comments.success' | t }}
+                {% endif %}
+              </p>
+              {% endif %}
+              <h2 class="reply-comment-title">{{ 'blogs.comments.title' | t }}</h2>
+
+              {% form "new_comment", article %}
+              {% if form.errors %}
+              {{ form.errors | default_errors }}
+              {% endif %}
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="comment-author" class="sr-only">{{ 'blogs.comments.name_label' | t }}</label>
+
+                    <input required class="form-control long{% if form.errors contains "author" %} error{% endif %}" type="text" name="comment[author]" placeholder="{{ 'blogs.comments.name_label' | t }}" id="comment-author" value="{{ form.author }}" />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="comment-email" class="sr-only">{{ 'blogs.comments.email_label_html' | t }}</label>
+
+                    <input required class="form-control long {% if form.errors contains "email" %}error{% endif %}" type="email" name="comment[email]" placeholder="{{ 'blogs.comments.email_placeholder' | t }}" id="comment-email" value="{{ form.email }}" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="reply-website" class="sr-only">Website</label>
+                <input type="text" class="form-control" id="reply-website" placeholder="Website">
+              </div>
+
+              <div class="form-group">
+                <label for="comment-body" class="sr-only">{{ 'blogs.comments.comment_body_label' | t }}</label>
+                <textarea required class="form-control long {% if form.errors contains "email" %}error{% endif %}" name="comment[body]" id="comment-body">{{ form.body }}</textarea>
+              </div>
+
+              <div class="form-submit">
+                <input type="submit" class="btn btn-lg btn-dark btn-outline" value="{{ 'blogs.comments.comment_submit' | t }}" />
+
+              </div>
+              {% endform %}
+            </div>
+          </div>
+        </div><!-- /.entry-container -->
+      </div>
+      {%if settings.blogstyle == "style3"%}{%else%}
+      <div class="col-md-3  {%if settings.blogstyle == "style1" %}col-md-pull-9{%endif%}">
+        {% include "blog-widgets" %}
+      </div>
+      {%endif%}
+
+
+
+    </div><!-- /.row -->
+  </div><!-- /.container -->
+</div><!-- /.blog-wrapper -->
+

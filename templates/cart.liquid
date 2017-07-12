@@ -1,0 +1,224 @@
+
+<div class="container">
+  <ol class="breadcrumb">
+    <li><a href="#">{{ 'general.breadcrumbs.home' | t }}</a></li>
+    <li class="active"><span>{{ 'general.breadcrumbs.cart' | t }}</span></li>
+  </ol>
+</div>
+
+<section id="cart">
+  <div class="container">
+    <h1>{{ 'cart.general.title' | t }}</h1>
+    {% if cart.announcements.size > 0 %}
+    <h3>
+      <ul class="cart-banner">
+        {% for announcement in cart.announcements %}
+        <li>{{ announcement }}</li>
+        {% endfor %}
+      </ul>
+    </h3>
+    {% endif %}
+    {% if cart.errors.size > 0 %}
+    <ul class="cart-banner error">
+      {% for error in cart.errors %}
+      <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% if cart.item_count > 0 %}
+
+    <form class="cart-form" action="/cart" method="post" novalidate >
+
+      <div class="table-responsive">
+
+        <table class="table cart-table">
+
+          <thead>
+
+            <tr>
+
+              <th></th>
+
+              <th class="product-name">Product</th>
+
+              <th>{{ 'cart.labels.price' | t }}</th>
+
+              <th>{{ 'cart.labels.quantity' | t }}</th>
+
+              <th>{{ 'cart.labels.total' | t }}</th>
+
+            </tr>
+
+          </thead>
+          <tbody>
+            {% for item in cart.items %}
+            <tr>
+
+              <td class="product-remove">
+
+                <a  class="remove" href="/cart/change?line={{ forloop.index }}&amp;quantity=0" data-id="{{ item.id }}" ><i class="fa fa-times-circle"></i></a>
+
+              </td>
+
+              <td class="product-name">
+
+                <a href="{{ item.url | within: collections.all }}">
+
+                  <img src="{{ item | img_url: 'compact' }}" alt="{{ item.title | escape }}" />
+
+                  <span><a href="{{ item.url | within: collections.all }}">{{ item.title }}</a></span>
+
+                </a>
+
+              </td>
+
+              <td class="product-price">
+
+                <p class="price"> {{ item.price | money }}</p>
+
+              </td>
+
+              <td>
+
+                <div class="quantity">
+
+                  <input type="text" name="updates[]"  min="0" value="{{ item.quantity }}" data-id="{{ item.id }}" title="Qty" class="qty" size="4">
+
+                </div>
+
+              </td>
+
+              <td class="product-subtotal product-price">
+
+                <span class="price">
+                  {% if item.original_line_price != item.line_price %}
+                  <small class="cart-item__original-price"><s>{{ item.original_line_price | money }}</s></small>
+                  {% endif %}
+                  {{ item.line_price | money }}
+                </span>
+                {% if item.original_line_price != item.line_price %}
+                {% for discount in item.discounts %}
+                <small class="cart-item__discount">
+                  {{ discount.title }}
+                </small>
+                {% endfor %}
+                {% endif %}
+
+
+              </td>
+
+            </tr>
+
+            {%endfor%}
+
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <div class="col-sm-6 f-right">
+        <!--START TOTAL-->
+        <div class="cart-total right">
+          <table>
+            <tbody>
+              <div class="margin-bottom-30"><a href="/collections/all">{{ 'cart.general.continue_link' | t }}</a></div>
+              {% if cart.discounts.size > 0 %}
+              <div class="cart-additional-savings text-right cart__row">
+                <span class="label cart-additional-savings__label">{{ 'cart.general.additional_savings' | t }}</span>
+                <span class="h5 cart-additional-savings__price">{{ cart.discount.total_savings | money }}</span>
+                {% for discount in cart.discounts %}
+                <small class="cart-additional-savings__savings">{{ discount.title }}</small>
+                {% endfor %}
+              </div>
+              {% endif %}
+
+            </tbody>
+            <tbody>
+              <div class="cart__row">
+                <div class="grid">
+                  {% comment %}
+                  Optional, add a textarea for special notes
+                  - Your theme settings can turn this on or off. Default is on.
+                  - Make sure you have name="note" for the message to be submitted properly
+                  {% endcomment %}
+                  {% if settings.cart_notes_enable %}
+                  {% assign noteSize = cart.note | size %}
+                  <div class="grid__item large--five-twelfths">
+                    <button type="button" class="text-link cart__note-add{% if noteSize > 0 %} is-hidden{% endif %}">
+                      {{ 'cart.label.add_note' | t }}
+                    </button>
+                    <div class="cart__note{% if noteSize > 0 %} is-active{% endif %}">
+                      <label for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
+                      <textarea name="note" class="input-full" id="CartSpecialInstructions">{{ cart.note }}</textarea>
+                    </div>
+                  </div>
+                  {% endif %}
+                  <div class="grid__item text-right{% if settings.cart_notes_enable %} large--seven-twelfths{% endif %}">
+                    <p class="total margin-bottom-30">
+                      <span class="title">{{ 'cart.general.cart_total_html' | t }}</span>
+                      <span class="price">{{ cart.total_price | money }}</span>
+                      {% if cart.total_discounts > 0 %}
+                      {% assign savings = cart.total_discounts | money %}
+                      <small class="cart-subtotal__savings">{{ 'cart.general.cart_total_html' | t: price: savings }}</small>
+                      {% endif %}
+                    </p>
+
+                    <input type="submit" name="update" class="btn btn-lg btn-primary" value="{{ 'cart.general.update' | t }}">
+                    <input type="submit" name="checkout" class="btn btn-lg btn-primary" value="{{ 'cart.general.check_out' | t }}">
+
+                    {% if additional_checkout_buttons %}
+                    <div class="cart__additional_checkout">{{ content_for_additional_checkout_buttons }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+
+              </div>
+            </tbody>
+
+
+          </table>
+
+        </div>
+
+        <!--END TOTAL-->
+
+      </div>
+
+
+
+    </form>
+
+
+    {% else %}
+    <p>{{ 'cart.general.empty_cart_message_html' | t }}</p>
+    {% endif %}
+  </div>
+</section>
+<script>
+
+  /*  [ Add minus and plus number quantity ]
+		- - - - - - - - - - - - - - - - - - - - */
+  if( $( '.quantity' ).length > 0 ) {
+    var form_cart = $( 'form .quantity' );
+    form_cart.prepend( '<span class="minus"><i class="fa fa-minus-square-o"></i></span>' );
+    form_cart.append( '<span class="plus"><i class="fa fa-plus-square-o"></i></span>' );
+
+    var minus = form_cart.find( $( '.minus' ) );
+    var plus  = form_cart.find( $( '.plus' ) );
+
+    minus.on( 'click', function(){
+      var qty = $( this ).parent().find( '.qty' );
+      if ( qty.val() <= 1 ) {
+        qty.val( 1 );
+      } else {
+        qty.val( ( parseInt( qty.val() ) - 1 ) );
+      }
+    });
+    plus.on( 'click', function(){
+      var qty = $( this ).parent().find( '.qty' );
+      qty.val( ( parseInt( qty.val() ) + 1 ) );
+    });
+  }
+</script>

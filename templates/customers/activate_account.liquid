@@ -1,0 +1,35 @@
+<!--START BREADCRUMB-->
+<div class="container">
+  <ol class="breadcrumb">
+    <li><a href="/">{{ 'general.breadcrumbs.home' | t }}</a></li>
+    <li class="active"><span>{{ 'general.breadcrumbs.activate_account' | t }}</span></li>
+  </ol>
+</div>
+<div class="six columns alpha omega">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-centered">
+        <div id="create-account">
+          <h1 class="accounts-title">{{ 'customer.activate_account.title' | t }}</h1>
+          {% form 'activate_customer_password' %}
+          {{ form.errors | default_errors }}
+          <div id="password" class="clearfix large_form form-group">
+            <label class="large" for="password">{{ 'customer.activate_account.password' | t }}</label>
+            <input type="password" value="" name="customer[password]" id="customer_password" class="long form-control dark" />
+          </div>
+          <div id="password_confirm" class="clearfix large_form form-group">
+            <label class="large" for="password_confirmation">{{ 'customer.activate_account.password_confirm' | t }}</label>
+            <input type="password" value="" name="customer[password_confirmation]" id="customer_password_confirmation" class="long form-control dark"  />
+          </div>
+          <p>{{ 'customer.activate_account.subtext' | t }}</p>
+          <div class="action_bottom">
+            <input type="submit" class="button primary btn btn-lg btn-primary margin-top-30 margin-bottom-50" value="{{ 'customer.activate_account.submit' | t }}" />
+            <span> {{ 'customer.general.or' | t }} </span>
+            <input type="submit" class=" button cancel btn btn-lg btn-primary margin-top-30 margin-bottom-50" name="decline" id="customer_decline" value="{{ 'customer.activate_account.cancel' | t }}" />
+          </div>
+          {% endform %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

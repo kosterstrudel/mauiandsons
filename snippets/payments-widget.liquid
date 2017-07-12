@@ -1,0 +1,11 @@
+{% assign payment_title = settings.footer_payment_title %}
+{% assign payment_content = settings.footer_payment_content %}
+{%if payment_title != ""%}
+<div class="widget">
+  <h3 class="widget-title">{{payment_title}}</h3>
+
+  <ul class="list-socials">
+    {{payment_content}}
+  </ul>
+</div>
+{%endif%}

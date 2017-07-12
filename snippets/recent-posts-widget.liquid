@@ -1,0 +1,12 @@
+
+<div class="widget widget_recent_entries">
+  <h3 class="widget-title">{{settings.blog_sidebar_recentpost_title}}</h3>
+
+  <ul>
+    {% for article in blogs.news.articles limit: 5 %}
+    <li><a href="{{ article.url }}" title="{{ article.title }}">{{ article.title }}</a></li>
+    {%endfor%}
+    
+  </ul>
+</div><!-- /.widget -->
+

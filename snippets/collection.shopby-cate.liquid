@@ -1,0 +1,12 @@
+
+<div class="widget woocommerce widget_product_categories">
+  <h3 class="widget-title">{{settings.shopby_category_title}}</h3>
+
+  <ul>
+    {% capture collection_title %}{{ collection.title }}{% endcapture %}
+    {% for collection in collections %}      
+    <li {% if collection_title == collection.title %}class="active" {% endif %}><a  href="{{ collection.url }}" title="{{ collection.title }}">{{ collection.title }} <span>({{collection.products_count}})</span></a></li>   
+    {% endfor %}
+    
+  </ul>
+</div><!-- /.widget -->

@@ -1,0 +1,404 @@
+
+
+'use strict';
+
+if (window.jQuery) var $ = window.jQuery;
+
+$(function () {
+  aweHosoren.init();
+
+  //== DEMO ONLY
+  aweSearchMenubar();
+  {%comment%}
+  aweQuickViewProduct();
+  {%endcomment%}
+});
+
+function aweMaps(mapElement) {
+  if (! mapElement) {
+    mapElement = '#contact-map';
+  }
+
+  var map = new GMaps({
+    el: mapElement,
+    lat: $(mapElement).data('lat'),
+    lng: $(mapElement).data('lng'),
+
+    draggable: true,
+    scrollwheel: false
+  });
+
+  map.addMarker({
+    lat: $(mapElement).data('lat'),
+    lng: $(mapElement).data('lng'),
+  });
+}
+
+// ===
+
+function aweSearchMenubar() {
+  var $navbar = $('.awemenu-nav');
+
+  var $searchForm = $('#menubar-search-form');
+  var $openSearch = $('#open-search-form .icon-search');
+  var $closeSearch = $('#close-search-form');
+
+  $openSearch.on('click', function(e) {
+    e.preventDefault();
+    $searchForm.addClass('open');
+
+    setTimeout(function() {
+      $searchForm.find('input').focus();
+    }, 250);
+  });
+
+  $closeSearch.on('click', function(e) {
+    e.preventDefault();
+    $searchForm.removeClass('open');
+  });
+
+
+  $(window).resize(function() {
+    if ($navbar.hasClass('awemenu-mobile')) {
+      $searchForm.width('100%');
+      $searchForm.css({right: '0'});
+    } else {
+      var $awemenu = $('.awemenu-nav .awemenu');
+      var $aweicon = $('.awemenu-nav .navbar-icons');
+
+      var width = $awemenu.width() + 50;
+      var offsetRight = $aweicon.width() + 20;
+
+      $searchForm.width(width);
+      $searchForm.css({right: offsetRight});
+    }
+  }).trigger('resize');
+
+}
+
+$(document).click(function (e){
+  var container = $("#menubar-search-form");
+  var container2=$("#open-search-form");
+  if (!container.is(e.target) && !container2.is(e.target) && container.has(e.target).length === 0  && container2.has(e.target).length === 0){ 
+    $('#menubar-search-form').removeClass('open');
+  }
+});
+
+
+// ===
+function aweMainSlider() {
+  var $slider = $('.main-slider');
+
+  $slider.owlCarousel({
+    items: 1,
+    nav: true,
+    dots: true,
+    onInitialized: function() {
+      $slider.find('.owl-item').each(function() {
+        var $owlItem = $(this);
+
+        var $mainSlide = $owlItem.find('.main-slider-item');
+        var $mainImage = $owlItem.find('.main-slider-image > img');
+
+        if ($mainSlide.length && $mainImage.length) {
+          $mainSlide.addClass('background');
+          $mainSlide.css('background-image', 'url('+$mainImage.attr('src')+')');
+
+          $mainImage.css({
+            opacity: 0,
+            visibility: 'hidden'
+          });
+        }
+      });
+    }
+  });
+}
+
+function awePriceSlider($selector) {
+  if (! $selector) {
+    $selector = $('#price-slider');
+  }
+
+  $selector.slider({
+    values: [35, 250],
+    min: 10,
+    max: 320,
+    step: 10,
+    range: true,
+    slide: function(e, ui) {
+      $('#amount').text('$'+ui.value);
+    }
+  });
+}
+
+function aweBlogMasonry($selector) {
+  if (! $selector) {
+    $selector = $('.blog-masonry .row-masonry');
+  }
+
+  $selector.imagesLoaded(function() {
+    $selector.masonry({
+      itemSelector: '.column',
+      columnWidth: '.column'
+    });
+  });
+}
+
+function aweProfolioIsotope($selector) {
+  if (! $selector) {
+    $selector = $('.grid');
+  }
+
+  $selector.imagesLoaded(function() {
+    var $grid = $selector.isotope({
+      itemSelector: '.grid-item',
+      layoutMode: 'masonry'
+    });
+  });
+
+  $('.awe-nav').on('click', 'a', function(e) {
+    e.preventDefault();
+
+    $(this).parents('.awe-nav').find('li').removeClass('active');
+    $(this).closest('li').addClass('active');
+
+    var filter = $(this).attr('data-filter');
+    $selector.isotope({ filter: filter });
+  });
+}
+
+function aweProfolioDetail() {
+  $('.lasted-portfolio-carousel').owlCarousel({
+    items: 4,
+    nav: true,
+    dots: false,
+    margin: 30,
+    responsive: {
+      0: { items: 1 },
+      480: { items: 2 },
+      768: { items: 3 },
+      980: { items: 4 }
+    }
+  });
+
+  $('.image').magnificPopup({
+    type: 'image',
+    delegate: 'a',
+    gallery: { enabled: true }
+  });
+}
+
+function aweProductSidebar() {
+  var $filterSidebar = $('#shop-widgets-filters');
+  var $toggleButton = $('#open-filters');
+
+  var $overlay = $('body').find('.widgets-filter-overlay');
+
+  function _open() {
+    $filterSidebar.addClass('open');
+    $toggleButton.addClass('open');
+
+    if (! $overlay.length) {
+      $('body').append('<div class="widgets-filter-overlay"></div>');
+    }
+
+    $('body').addClass('open-filters-open');
+  }
+
+  function _close() {
+    $filterSidebar.removeClass('open');
+    $toggleButton.removeClass('open');
+    $(document).find('.widgets-filter-overlay').remove();
+    $('body').removeClass('open-filters-open');
+  }
+
+  $toggleButton.on('click', function() {
+    if (! $filterSidebar.hasClass('open')) {
+      _open();
+    } else {
+      _close();
+    }
+  });
+
+  $('html').on('click', '.widgets-filter-overlay', function() {
+    _close();
+  });
+}
+
+function aweProductRender(thumbHorizontal) {
+  if (Modernizr && ! Modernizr.touch) {
+    $('.easyzoom').easyZoom();
+  }
+
+  var sMain = new Swiper('.product-slider-main', {
+    loop: false,
+
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev'
+  });
+
+  var sThumb = new Swiper('.product-slider-thumbs', {
+    loop: false,
+    centeredSlides: true,
+    spaceBetween: thumbHorizontal ? 15 : 0,
+    slidesPerView: thumbHorizontal ? 4 : 3,
+    direction: thumbHorizontal ? 'horizontal' : 'vertical',
+    slideToClickedSlide: true
+  });
+
+  sMain.params.control = sThumb;
+  sThumb.params.control = sMain;
+}
+
+
+
+
+var selectCallback = function(variant, selector) {
+  if (variant) {
+    if (variant.available) {
+      // Selected a valid variant that is available.
+      $('#add').removeClass('disabled').removeAttr('disabled').val('Add to Cart').fadeTo(200,1);
+    } else {
+      // Variant is sold out.
+      $('#add').val('Sold Out').addClass('disabled').attr('disabled', 'disabled').fadeTo(200,0.5);        
+    }
+    // Whether the variant is in stock or not, we can update the price and compare at price.
+    if ( variant.compare_at_price > variant.price ) {
+      $('#price-field').html('<span class="product-price on-sale">'+ Shopify.formatMoney(variant.price, "") +'</span>'+'&nbsp;<s class="product-compare-price">'+Shopify.formatMoney(variant.compare_at_price, "")+ '</s>');
+    } else {
+      $('#price-field').html('<span class="product-price">'+ Shopify.formatMoney(variant.price, "") + '</span>' );
+    }        
+  } else {
+    // variant doesn't exist.
+    $('#add').val('Unavailable').addClass('disabled').attr('disabled', 'disabled').fadeTo(200,0.5);
+  }
+}
+
+$(".swiper-container").each( function(){
+  var config = {
+    spaceBetween: $(this).data('margin'),
+    slidesPerView: $(this).data('items'),
+    direction: $(this).data('direction'),
+    paginationClickable: true,
+    grabCursor: true 
+  };		
+  var swiper = new Swiper(this, config);
+
+});
+
+
+// ================== New lable=============
+$('.product .product-inner').each(function(){
+
+  var pubDate = $(this).data("publish-date");
+  var pubDate2=pubDate.substr(0, 10);
+  var todayDate = new Date();
+  var time1 = Date.parse(pubDate2);
+  var time2 = Date.parse(todayDate);
+  var time= Math.abs(time2 - time1);
+  var a= {{settings.product_new_time}}*24*60*60*1000;
+
+  if(time < a){
+    $('.product .product-inner .new').show();
+
+  }
+});
+
+$(document).ready(function(){
+  if($(".product-body-list").children().length > 0){
+  
+    $('.view-mode .grid').removeClass('active');
+     $('.view-mode .list').addClass('active');
+  }
+});
+
+
+
+
+/* Promotion Countdown */
+jQuery(document).ready(function($) {
+  $.fn.ENGO_CountDown = function( options ) {
+    return this.each(function() {
+      // get instance of the ENGO_CountDown.
+      new  $.ENGO_CountDown( this, options );
+    });
+  }
+  $.ENGO_CountDown = function( obj, options ){
+    var ddiff, gsecs;
+    this.options = $.extend({
+      autoStart           : true,
+      LeadingZero:true,
+      DisplayFormat:"<div><span>%%D%%</span> Days</div><div><span>%%H%%</span> Hours</div><div><span>%%M%%</span> Mins</div><div><span>%%S%%</span> Secs</div>",
+      FinishMessage:"Expired",
+      CountActive:true,
+      TargetDate:null
+    }, options || {} );
+    if( this.options.TargetDate == null || this.options.TargetDate == '' ){
+      return ;
+    }
+    this.timer  = null;
+    this.element = obj;
+    this.CountStepper = -1;
+    this.CountStepper = Math.ceil(this.CountStepper);
+    this.SetTimeOutPeriod = (Math.abs(this.CountStepper)-1)*1000 + 990;
+    var dthen = new Date(this.options.TargetDate);
+    var dnow = new Date();
+    if( this.CountStepper > 0 ) {
+      ddiff = new Date(dnow-dthen);
+    }
+    else {
+      ddiff = new Date(dthen-dnow);
+    }
+    gsecs = Math.floor(ddiff.valueOf()/1000);
+    this.CountBack(gsecs, this);
+  };
+  $.ENGO_CountDown.fn =  $.ENGO_CountDown.prototype;
+  $.ENGO_CountDown.fn.extend =  $.ENGO_CountDown.extend = $.extend;
+  $.ENGO_CountDown.fn.extend({
+    calculateDate:function( secs, num1, num2 ){
+      var s = ((Math.floor(secs/num1))%num2).toString();
+      if ( this.options.LeadingZero && s.length < 2) {
+        s = "0" + s;
+      }
+      return "<b>" + s + "</b>";
+    },
+    CountBack:function( secs, self ){
+      var DisplayStr;
+      if (secs < 0) {
+        self.element.innerHTML = '<div class="labelexpired"> '+self.options.FinishMessage+"</div>";
+        return;
+      }
+      clearInterval(self.timer);
+      DisplayStr = self.options.DisplayFormat.replace(/%%D%%/g, self.calculateDate( secs,86400,100000) );
+      DisplayStr = DisplayStr.replace(/%%H%%/g, self.calculateDate(secs,3600,24));
+      DisplayStr = DisplayStr.replace(/%%M%%/g, self.calculateDate(secs,60,60));
+      DisplayStr = DisplayStr.replace(/%%S%%/g, self.calculateDate(secs,1,60));
+      self.element.innerHTML = DisplayStr;
+      if (self.options.CountActive) {
+        self.timer = null;
+        self.timer =  setTimeout( function(){
+          self.CountBack((secs+self.CountStepper),self);
+        },( self.SetTimeOutPeriod ) );
+      }
+    }
+
+  });
+
+  function init_countdown() {
+    /** Countdown **/
+    $('[data-countdown="countdown"]').each(function(index, el) {
+      var $this = $(this);
+      var $date = $this.data('date').split("-");
+      $this.ENGO_CountDown({
+        TargetDate:$date[0]+"/"+$date[1]+"/"+$date[2]+" "+$date[3]+":"+$date[4]+":"+$date[5],
+        DisplayFormat:"<li><span>%%D%% </span>days</li><li><span>%%H%% </span>hours</li><li><span>%%M%% </span>mins</li><li><span>%%S%% </span>secs</li>",
+        FinishMessage: "Expired"
+      });
+    });
+
+    
+    
+  }
+  init_countdown();
+});
+

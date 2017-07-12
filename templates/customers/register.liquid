@@ -1,0 +1,63 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><a href="/">{{ 'general.breadcrumbs.home' | t }}</a></li>
+    <li class="active"><span>{{ 'general.breadcrumbs.register' | t }}</span></li>
+  </ol>
+</div>
+
+<div class="login-register-wrapper">
+  <div class="container">
+    <div class="row">
+      {% form 'create_customer' %}
+      {{ form.errors | default_errors }}
+      <div class="col-md-6 col-centered">
+        <h2>{{ 'general.breadcrumbs.register' | t }}</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="first_name" class="login">{{ 'customer.register.first_name' | t }}<sup>*</sup></label>
+              <input type="text" value="" class="form-control dark" name="customer[first_name]"  placeholder="First Name" id="first_name" class="long" size="30" />
+            </div><!-- /.form-group -->
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="last_name" class="login">{{ 'customer.register.last_name' | t }}<sup>*</sup></label>
+              <input type="text" value="" name="customer[last_name]" id="last_name" class="form-control dark"  />
+
+
+            </div><!-- /.form-group -->
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="login">{{ 'customer.register.email' | t }} <sup>*</sup></label>
+          <input type="email" value="" name="customer[email]" id="email" class="form-control dark" class="form-control dark" />
+
+        </div><!-- /.form-group -->
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="password">
+              <label for="password" class="login">{{ 'customer.register.password' | t }}<sup>*</sup></label>
+              <input type="password" value="" name="customer[password]" id="password" class="form-control dark" size="30" />
+            </div><!-- /.form-group -->
+          </div>
+        </div>
+        <div class="margin-top-15"><p>
+          <a href="/account/login" >{{ 'customer.login.login' | t }}</a>
+          </p>
+        </div>
+        <div class="action_bottom">
+          <input type="submit" class="btn btn-lg btn-primary margin-top-30 margin-bottom-50" value="{{ 'customer.register.submit' | t }}" />
+        </div>
+
+      </div>
+      {% endform %}
+
+
+
+    </div>
+
+  </div><!-- /.container -->
+</div><!-- /.checkout-wrapper -->

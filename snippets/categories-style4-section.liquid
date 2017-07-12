@@ -1,0 +1,88 @@
+{% assign col1 = settings.category_1_collection %}
+{% assign col2 = settings.category_2_collection %}
+{% assign col3 = settings.category_3_collection %}
+
+{%capture collection_1%}category_1_collection{%endcapture%}
+{%capture category_title_1 %}category1_title{%endcapture%}
+{%capture category_subtitle_1 %}category1_subtitle{%endcapture%}
+{%capture category_img_1%}category1_img.jpg{%endcapture%}
+{%capture category_img2_1%}category1_img_2.jpg{%endcapture%}
+{%capture category_url_1%}category1_url{%endcapture%}
+
+{%capture collection_2%}category_2_collection{%endcapture%}
+{%capture category_title_2 %}category2_title{%endcapture%}
+{%capture category_subtitle_2 %}category2_subtitle{%endcapture%}
+{%capture category_img_2%}category2_img.jpg{%endcapture%}
+{%capture category_img2_2%}category2_img_2.jpg{%endcapture%}
+{%capture category_url_2%}category2_url{%endcapture%}
+
+{%capture collection_3%}category_3_collection{%endcapture%}
+{%capture category_title_3 %}category3_title{%endcapture%}
+{%capture category_subtitle_3 %}category3_subtitle{%endcapture%}
+{%capture category_img_3%}category3_img.jpg{%endcapture%}
+{%capture category_img2_3%}category3_img_2.jpg{%endcapture%}
+{%capture category_url_3%}category3_url{%endcapture%}
+{%assign products_limit = '9'%}
+
+        <div class="cate4-wrapper padding-vertical-50">
+            <div class="cate-section-trait">
+                <div class="content">
+                    <h2>
+                        <small>{{'collections.fashion'|t}}</small>
+                        <span>{{settings[category_title_1]}}</span>
+                    </h2>
+
+                    <p class="lead">{{settings[category_subtitle_1]}}</p>
+
+                    <a href="{{settings[category_url_1]}}" class="btn btn-lg btn-dark btn-outline">{{'collections.view_all_category'|t}}</a>
+
+                    <div class="small-image">
+                        {{ category_img2_1 | asset_url | img_tag: settings[category_title_1] }}
+                    </div>
+                </div>
+
+                <div class="large-image">
+                    {{ category_img_1 | asset_url | img_tag: settings[category_title_1] }}
+                </div>
+            </div><!-- /.cate-section-trait -->
+
+            <div class="cate-section-trait">
+                <div class="content">
+                     <h2>
+                        <small>{{'collections.fashion'|t}}</small>
+                        <span>{{settings[category_title_2]}}</span>
+                    </h2>
+
+                    <p class="lead">{{settings[category_subtitle_2]}}</p>
+
+                    <a href="{{settings[category_url_2]}}" class="btn btn-lg btn-dark btn-outline">{{'collections.view_all_category'|t}}</a>
+                  <div class="small-image">
+                        {{ category_img2_2 | asset_url | img_tag: settings[category_title_2] }}
+                    </div>
+                </div>
+
+                <div class="large-image">
+                    {{ category_img_2 | asset_url | img_tag: settings[category_title_2] }}
+                </div>
+            </div><!-- /.cate-section-trait -->
+
+            <div class="cate-section-trait">
+                <div class="content">
+                     <h2>
+                        <small>{{'collections.fashion'|t}}</small>
+                        <span>{{settings[category_title_3]}}</span>
+                    </h2>
+
+                    <p class="lead">{{settings[category_subtitle_3]}}</p>
+
+                    <a href="{{settings[category_url_3]}}" class="btn btn-lg btn-dark btn-outline">{{'collections.view_all_category'|t}}</a>
+                  <div class="small-image">
+                        {{ category_img2_3 | asset_url | img_tag: settings[category_title_3] }}
+                    </div>
+                </div>
+
+                <div class="large-image">
+                    {{ category_img_3 | asset_url | img_tag: settings[category_title_3] }}
+                </div>
+            </div><!-- /.cate-section-trait -->
+        </div>

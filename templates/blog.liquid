@@ -1,0 +1,71 @@
+{% paginate blog.articles by 4 %}
+<div class="main-header background "  style="background-image:url({{ 'header_blog_img.jpg' | asset_url }}">
+  <div class="container">
+    <h1>{{settings.blog_title}}</h1>
+  </div>
+</div>
+
+<div class="container  margin-bottom-20">
+  <ol class="breadcrumb">
+    <li><a href="/">{{'general.breadcrumbs.home'|t}}</a></li>
+    <li class="active"><span>{{'blog.blog_title' | t}}</span></li>
+  </ol>
+</div>
+
+<div class="blog-wrapper blog-sidebar">
+  <div class="container">
+    <div class="row">
+      {%if settings.blogstyle == "style1" %}
+
+      <div class="col-md-3">
+        {% include "blog-widgets" %}
+      </div>
+      <div class="col-md-9">
+        {%include 'blog-list'%}
+        <div class="left">
+          <div class="padding">
+            {% if paginate.pages > 1 %}
+            {%include 'pagination'%}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {%endif%}
+      {%if settings.blogstyle == "style2"%}
+      <div class="col-md-9">
+
+        {%include 'blog-list'%}
+        <div class="left">
+          <div class="padding">
+            {% if paginate.pages > 1 %}
+            {%include 'pagination'%}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        {% include "blog-widgets" %}
+      </div>
+      {%endif%}
+      {%if settings.blogstyle == "style3"%}
+      <div class="col-md-9 col-centered">
+
+        {%include 'blog-list'%}
+        <div class="left">
+          <div class="padding">
+            {% if paginate.pages > 1 %}
+            {%include 'pagination'%}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      {%endif%}
+
+
+
+    </div><!-- /.row -->
+  </div><!-- /.container -->
+</div><!-- /.blog-wrapper -->
+
+{% endpaginate %}

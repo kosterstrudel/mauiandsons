@@ -1,0 +1,11 @@
+{% assign social_title = settings.footer_social_title %}
+{% assign social_content = settings.footer_social_content %}
+{%if social_title != "" %}
+<div class="widget">
+  <h3 class="widget-title">{{social_title}}</h3>
+
+  <ul class="list-socials">
+    {{social_content}}
+  </ul>
+</div>
+{%endif%}

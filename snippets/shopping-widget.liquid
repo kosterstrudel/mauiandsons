@@ -1,0 +1,13 @@
+{% assign shopping_title = settings.footer_shopping_title %}
+{% assign shopping_menu = settings.footer_shopping_content%}
+{%if shopping_title != "" %}
+<div class="widget">
+  <h3 class="widget-title">{{shopping_title}}</h3>
+
+  <ul>
+    {% for link in linklists[shopping_menu].links %}
+    <li><a href="{{ link.url }}">{{ link.title }}</a></li>   
+    {% endfor %}
+  </ul>
+</div><!-- /.widget -->
+{%endif%}

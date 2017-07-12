@@ -1,0 +1,14 @@
+{% assign more_link_title = settings.footer_morelink_title %}
+{% assign more_link_menu = settings.footer_morelink_content%}
+{%if more_link_title != ""%}
+<div class="widget">
+  <h3 class="widget-title">{{more_link_title}}</h3>
+
+  <ul>
+    {% for link in linklists[more_link_menu].links %}
+    <li><a href="{{ link.url }}">{{ link.title }}</a></li>   
+    {% endfor %}
+    
+  </ul>
+</div><!-- /.widget -->
+{%endif%}

@@ -1,0 +1,59 @@
+{% include 'breadcrumb' %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-sm-12 col-md-offset-1">
+
+      <div class="lookbooks">
+        {%for i in (1..8)%}
+        {% capture lookbook %}lookbook_{{i}}_enable{% endcapture %}
+        {% capture lookbook_title %}lookbook_{{i}}_title{% endcapture %}
+        {% capture lookbook_img %}lb_{{i}}_lg_img.jpg{% endcapture %}
+        {% capture lookbook_sm_img %}lb_{{i}}_sm_img.jpg{% endcapture %}
+        {% capture lookbook_subtitle %}lookbook_{{i}}_subtitle{% endcapture %}
+        {% capture lookbook_des %}lookbook_{{i}}_des{% endcapture %}
+        {% capture lookbook_url %}lookbook_{{i}}_url{% endcapture %}
+        
+        {%if settings[lookbook]%}
+        <div class="lookbook">
+          <h2>{{settings[lookbook_title]}}</h2>
+
+          <div class="heading">
+            <div class="image">
+              <img src="{{lookbook_img|asset_url}}" alt="">
+            </div>
+          </div>
+
+          <div class="content">
+            <div class="small-image">
+              <img src="{{lookbook_sm_img|asset_url}}" alt="">
+            </div>
+
+            <div class="content-body">
+              <h3>
+                <a href="{{settings[lookbook_url]}}">{{settings[lookbook_subtitle]}}</a>
+              </h3>
+
+              <p>{{settings[lookbook_des]}}</p>
+
+              <div class="">
+                <a href="{{settings[lookbook_url]}}" class="btn btn-lg btn-dark">
+                  <span>VIEW LOOKBOOK</span>
+                  <i class="fa fa-chevron-right margin-left-5"></i>
+                </a>
+              </div>
+            </div>
+
+            <span class="line"></span>
+          </div>
+        </div><!-- /.lookbook -->
+        {%endif%}
+        {%endfor%}
+
+       
+      </div><!-- /.lookbooks -->
+
+     
+
+    </div>
+  </div><!-- /.row -->
+</div><!-- /.container -->
