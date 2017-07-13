@@ -1,0 +1,134 @@
+
+/* Start product style */
+
+.panda-swatches-cont {
+	width: 100%;
+	margin-bottom: 10px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	clear: both;
+}
+
+.panda-swatches-cont:last-of-type {
+	margin-bottom: 20px;
+}
+
+.panda-swatches-cont .panda-header {
+	display: block;
+	padding-bottom: 8px;
+}
+
+.panda-swatches-cont .panda-swatch {
+	position: relative;
+
+	-webkit-transition: border 0.3s ease;
+	-o-transition: border 0.3s ease;
+	-moz-transition: border 0.3s ease;
+	transition: border 0.3s ease;
+
+	width: 32px;
+	height: 32px;
+	display: inline-block;
+
+	border: 1px solid whitesmoke;
+	padding: 2px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	cursor: pointer;
+}
+
+.panda-swatches-cont .panda-swatch:hover {
+	border: 1px solid #adadad;
+}
+
+.panda-swatches-cont .panda-swatch.ps-selected {
+	border:1px solid #474747 !important;
+}
+
+.panda-swatches-cont .panda-swatch .ps-image-cont {
+	width: 100%;
+	height: 100%;
+}
+
+.panda-swatches-cont.ps-align-left {
+	text-align: left;
+}
+
+.panda-swatches-cont.ps-align-left .panda-swatch {
+	margin-right: 4px;
+}
+
+.panda-swatches-cont.ps-align-center {
+	text-align: center;
+}
+
+.panda-swatches-cont.ps-align-center .panda-swatch {
+	margin-right: 2px;
+	margin-left: 2px;
+}
+
+.panda-swatches-cont.ps-align-right {
+	text-align: right;
+}
+
+.panda-swatches-cont.ps-align-right .panda-swatch {
+	margin-left: 4px;
+}
+
+/* End product style */
+
+/* Start collection style */
+
+.panda-swatches-coll-cont {
+	width: 100%;
+	margin-bottom: 10px;
+	text-align: center;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	margin-top: 10px;
+}
+
+.panda-swatches-coll-cont .panda-swatch-coll {
+	-webkit-transition: border 0.3s ease;
+	-o-transition: border 0.3s ease;
+	-moz-transition: border 0.3s ease;
+	transition: border 0.3s ease;
+
+	width: 32px;
+	height: 32px;
+	display: inline-block;
+
+	border: 1px solid whitesmoke;
+	margin-right: 2px;
+	margin-left: 2px;
+
+	padding: 2px;
+}
+
+.panda-swatches-coll-cont .panda-swatch-coll.ps-have-image:hover {
+	cursor: pointer;
+
+	border: 1px solid #adadad;
+}
+
+.panda-swatches-coll-cont .panda-swatch-coll .ps-image-cont {
+	width: 100%;
+	height: 100%;
+}
+
+.panda-swatches-coll-cont .ps-have-more {
+	display: block;
+	font-size: 14px !important;
+	text-transform: none !important;
+	cursor: pointer;
+}
+
+/* End collection style */
+

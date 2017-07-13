@@ -88,6 +88,7 @@
                 {% endif %}
                 {% endfor %}
               </select>
+              {% include 'panda-swatch' with 'product' %}
               <div class="product-single-quantity{% unless settings.product_quantity_enable %} is-hidden{% endunless %}">
                 <label for="Quantity">{{ 'product.quantity' | t }} :</label>
                 <input  type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-selector form-control">
