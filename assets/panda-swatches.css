@@ -4,6 +4,8 @@
 .panda-swatches-cont {
 	width: 100%;
 	margin-bottom: 10px;
+	margin-top:10px;
+	padding-top:10px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
