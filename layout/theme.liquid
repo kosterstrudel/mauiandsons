@@ -62,6 +62,9 @@
   {{ 'jpreloader.js' | asset_url | script_tag }}
   {{ 'custom.js' | asset_url | script_tag }}
   {{ 'custom.css' | asset_url | stylesheet_tag }}
+  {{ 'bc-sf-filter.css' | asset_url | stylesheet_tag }}
+
+
 
 
 
@@ -218,6 +221,14 @@
     {%endif%}
 
   </script>
+  {% if template contains 'collection' %}
+ {{ 'bc-sf-filter-lib.js' | asset_url | script_tag }}
+ {{ 'bc-sf-filter.js' | asset_url | script_tag }}
+<script>
+  var bcsffilter = new BCSfFilter();
+  bcsffilter.init();
+</script>
+{% endif %} 
 </body>
 
 </html>
