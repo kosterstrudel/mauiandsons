@@ -649,7 +649,7 @@
     "show_tag": true,
     "show_category": true,
     "show_social_product": true,
-    "show_special_featured": true,
+    "show_special_featured": false,
     "show_special_featured_title": "Special Features:",
     "show_special_featured_line_1": "1914 translation by H. Rackham",
     "show_special_featured_line_2": "The standard Lorem Ipsum passage, used since the 1500s",
