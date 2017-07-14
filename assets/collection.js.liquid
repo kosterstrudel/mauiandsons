@@ -5,16 +5,16 @@
   }); 
 
   if ($(".collection-sidebar")) {
-    History.Adapter.bind(window, 'statechange', function() {
-      var State = History.getState();
-      if (!collection.fillterClick) {        
-        collection.filterParams();
-        var newurl = collection.filterCreateUrl();
-        collection.filterGetContent(newurl);
-        collection.resetFilter();
-      }
-      collection.fillterClick = false;
-    });
+//     History.Adapter.bind(window, 'statechange', function() {
+//       var State = History.getState();
+//       if (!collection.fillterClick) {        
+//         collection.filterParams();
+//         var newurl = collection.filterCreateUrl();
+//         collection.filterGetContent(newurl);
+//         collection.resetFilter();
+//       }
+//       collection.fillterClick = false;
+//     });
   }
 
 

@@ -420,5 +420,12 @@
   "filter": {
     "show": "Show",
     "per_page": "per page"
+  },
+  "product_filter_search": {
+    "refine": "Refine By",
+    "refine_mobile": "Refine By",
+    "clear": "Clear",
+    "clear_all": "Clear All",
+    "apply": "Apply"
   }
 }

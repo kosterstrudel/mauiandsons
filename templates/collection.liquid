@@ -22,17 +22,104 @@
   <div class="row">
     <div class="{%if settings[style] =="no"%}col-md-12{%else%} col-md-9 {%if settings[style] =="left"%}col-md-push-3 {%endif%}{%endif%}">
 
-      {% include "product-filters" %}                
+      {% comment  %} {% include "product-filters" %} {% endcomment %}
+ 
+      <div class="product-header-actions">
+        <div  class="form-inline " >
+          <div class="row">
+            <div class="col-md-4 col-sm-5">
+
+              <div class="view-icons view-mode" id="bc-sf-filter-top-display-type">
+                
+              </div>
+
+              <div class="view-count">
+                <p class="text-muted bc-sf-filter-show-items">
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-8 col-sm-7 col-xs-12">
+              <div class="form-show-sort">
+                {% if settings.collection_results_per_page != blank %}
+                {% assign product_per_page = settings.collection_results_per_page %}
+                {% else %}
+                {% assign product_per_page = 12 %}
+                {% endif %}
+                {% assign current_page_size = paginate.page_size %}
+
+                <div class="form-group pull-left collection-show" role="menu">
+                  <div class="dropdown">
+                     <label >{{'filter.show'|t}}</label>
+                    	<div id="bc-sf-filter-top-show-limit"></div>
+                     <strong>{{'filter.per_page'|t}}</strong>
+                  </div>
+                </div>
+
+
+                <div class="collection-sorting form-horizontal form-group pull-right text-right">
+                  <div class="dropdown">
+                    <div id="bc-sf-filter-top-sorting"></div>
+                  </div>
+                </div>
+
+                <script>
+                  /*============================================================================
+                    Inline JS because collection liquid object is only available
+                    on collection pages, and not external JS files
+                  ==============================================================================*/
+                  Shopify.queryParams = {};
+                  if (location.search.length) {
+                    for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+                      aKeyValue = aCouples[i].split('=');
+                      if (aKeyValue.length > 1) {
+                        Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+                      }
+                    }
+                  }
+
+                  $(function() {
+                    $('#SortBy')
+                    .val('{{ collection.sort_by | default: collection.default_sort_by }}')
+                         .bind('change', function() {
+                      Shopify.queryParams.sort_by = jQuery(this).val();
+                      location.search = jQuery.param(Shopify.queryParams);
+                    }
+                    );
+                  });
+                </script>
+
+              </div>
+            </div>
+          </div><!-- /.row -->
+        </div>
+      </div><!-- /.product-header-actions -->
+
+      
+      
 
       <div id="collection-products">
         <div class="collection-grid">
           <div class="products-grid ">
-            {% include "products-grid" %}
+            {%capture num_col%}collection_number_col{%endcapture%}
+            {%capture num_col2%}collection_number_col_2{%endcapture%}
+            {%capture num_col3%}collection_number_col_3{%endcapture%}
+
+            <div class="products products-grid-wrapper">
+              <div class="row" id="bc-sf-filter-products">
+                {% for product in collection.products %}
+                <div class="col-md-{{settings[num_col]}} col-sm-{{settings[num_col2]}} col-xs-{{settings[num_col3]}} product-wrap product-wrap1">
+                  {% include "product-grid" %}
+                </div>    
+                {% endfor %}
+              </div><!-- /.row -->
+			</div><!-- /.products -->
           </div>
         </div>
         <div class="padding">
           {% if paginate.pages > 1 %}
-          {%include 'pagination'%}
+          
+          	<div id="bc-sf-filter-bottom-pagination"></div>
           {% endif %}
         </div>
       </div>
@@ -40,8 +127,8 @@
     {%if settings[style] =="no"%}{%else%}
     <div class="col-md-3 {%if settings[style] =="left"%}col-md-pull-9 {%endif%} collection-sidebar">
       <div id="shop-widgets-filters" class="shop-widgets-filters ">
-        
-        {% include "collection-sidebar" %}
+        <div id="bc-sf-filter-tree-mobile"></div>
+        <div id="bc-sf-filter-tree"></div>
       </div>
 
       <div id="open-filters">
@@ -60,3 +147,79 @@
  
 </script>
 
+
+<script>
+  // Declare bcSfFilterConfig variable
+  var bcSfFilterConfig = {
+    shop: {
+      apiUrl: 'https://services.mybcapps.com/bc-sf-filter/filter',
+      name: '{{ shop.name | escape }}',
+      url: '{{ shop.url }}',
+      domain: '{{ shop.permanent_domain }}',
+      currency: '{{ shop.currency }}',
+      money_format: '{{ shop.money_format }}'
+    },
+    general: {
+      file_url: "{{ '' | file_url }}",
+      asset_url: "{{ 'bc-sf-filter.js' | asset_url }}",
+      collection_id: {{ collection.id | default: 0 }},
+      collection_handle: "{{ collection.handle }}",
+      {% for tag in collection.tags %} 
+        {% assign tag_handle = tag | handle %}
+        {% for current_tag in current_tags %} 
+          {% assign current_tag_handle = current_tag | handle %}
+          {% if current_tag_handle == tag_handle %}
+            {% assign current_tag_text = tag %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+      {% if current_tag_text != blank %}
+        collection_tags: ["{{ current_tag_text }}"],
+      {% endif %}
+      default_sort_by: "{{ collection.default_sort_by }}",
+      swatch_extension: "png",
+      no_image_url: "{{ 'bc-sf-filter-no-image.gif' | asset_url }}"
+    },
+    label: {
+      refine: "{{ 'product_filter_search.refine' | t }}",
+      refine_mobile: "{{ 'product_filter_search.refine_mobile' | t }}",
+      clear: "{{ 'product_filter_search.clear' | t }}",
+      clear_all: "{{ 'product_filter_search.clear_all' | t }}",
+      apply: "{{ 'product_filter_search.apply' | t }}",
+      sorting: "{{ 'collections.sorting.title' | t }}",
+      sorting_featured: "{{ 'collections.sorting.featured' | t }}",
+      sorting_title_ascending: "{{ 'collections.sorting.az' | t }}",
+      sorting_title_descending: "{{ 'collections.sorting.za' | t }}",
+      sorting_price_ascending: "{{ 'collections.sorting.price_ascending' | t }}",
+      sorting_price_descending: "{{ 'collections.sorting.price_descending' | t }}",
+      sorting_date_ascending: "{{ 'collections.sorting.date_ascending' | t }}",
+      sorting_date_descending: "{{ 'collections.sorting.date_descending' | t }}",
+      sale: "{{ 'products.product.sale' | t }}",
+      sold_out: "{{ 'products.product.sold_out' | t }}",
+      from_html: "{{ 'products.general.from_html' | t }}",
+      collections_new: "{{ 'collections.products.new'| t }}", 
+      collections_sale: "{{ 'collections.products.sale' | t }}",
+      product_add_cart: "{{settings.product_add_cart}}",
+      product_options: "{{settings.product_options}}",
+      product_quickview: "{{settings.product_quickview}}",
+      product_wishlist: "{{ settings.product_wishlist }}",
+      of: "{{ 'collections.toolbar.of' | t }}",
+      to: "{{ 'collections.toolbar.to' | t }}",
+      item: "{{ 'collections.toolbar.item' | t }}",
+      items: "{{ 'collections.toolbar.items' | t }}",
+    },
+    custom: {
+      num_col: {{ settings.collection_number_col }},
+      num_col_2: {{ settings.collection_number_col_2 }},
+      num_col_3: {{ settings.collection_number_col_3 }},
+      show_sale_label: {{ settings.show_sale_label }},
+      show_new_label: {{ settings.show_new_label }},
+      product_per_page: {{ product_per_page }},
+      current_page_size: {{ current_page_size }},
+    },
+    customer: {
+      tags: {{ customer.tags | json }},
+      email: "{{ customer.email }}"
+    }
+  };
+</script>

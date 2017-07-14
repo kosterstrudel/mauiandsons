@@ -296,5 +296,12 @@
       "print": "Imprimer",
       "add_to_passbook": "Ajouter à Apple Wallet"
     }
+  },
+  "product_filter_search": {
+    "refine": "Refine By",
+    "refine_mobile": "Refine By",
+    "clear": "Clear",
+    "clear_all": "Clear All",
+    "apply": "Apply"
   }
 }

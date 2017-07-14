@@ -100,6 +100,11 @@
   <script>window.SHOW_LOADING = false;</script>
   {{ content_for_header }}
 
+<!--begin-bc-sf-filter-css-->
+  {% if template contains 'collection' %}
+    {{ 'bc-sf-filter.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+<!--end-bc-sf-filter-css-->
 </head>
 
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
@@ -222,14 +227,17 @@
     {%endif%}
 
   </script>
+ 
+<!--begin-bc-sf-filter-js-->
   {% if template contains 'collection' %}
- {{ 'bc-sf-filter-lib.js' | asset_url | script_tag }}
- {{ 'bc-sf-filter.js' | asset_url | script_tag }}
-<script>
-  var bcsffilter = new BCSfFilter();
-  bcsffilter.init();
-</script>
-{% endif %} 
+    {{ 'bc-sf-filter-lib.js' | asset_url | script_tag }}
+    {{ 'bc-sf-filter.js' | asset_url | script_tag }}
+    <script>
+      var bcsffilter = new BCSfFilter();
+      bcsffilter.init();
+    </script>
+  {% endif %}
+<!--end-bc-sf-filter-js-->
 </body>
 
 </html>
