@@ -65,13 +65,13 @@
     "footer_style": "style5",
     "about_title": "ABOUT MAUI & SONS",
     "about_content": "Maui and Sons Inspires a fun California lifestyle with a mix of Aloha!\nSurfing the Globe Since 1980.",
-    "help_info_title": "WE CAN HELP YOU?",
-    "help_info_content": "<p><span>Phone 1<\/span>: 8 (495) 989—20—11<\/p>\r\n    <p><span>Phone 2<\/span>: 8 (800) 875—05—26<\/p>\r\n    <p><span>Open - Close<\/span>: 09:00-21:00<\/p>\r\n    <p><span>Mail<\/span>: engotheme@gmail.com<\/p>",
+    "help_info_title": "SUPPORT",
+    "help_info_content": "<p><span>310-573-9499<\/p>\n<p>info (at) mauiandsons.com<\/p>",
     "footer_shopping_title": "SHOPPING",
     "footer_shopping_content": "shopping",
-    "footer_morelink_title": "MORE LINK",
+    "footer_morelink_title": "NAVIGATION",
     "footer_morelink_content": "morelinks",
-    "footer_social_title": "ARE YOU LIKE ME",
+    "footer_social_title": "SOCIAL",
     "footer_social_content": "<li><a href=\"http:\/\/www.facebook.com\/mauiandsons\" title=\"Facebook\"><i class=\"fa fa-facebook\"><\/i><\/a><\/li>\n<li><a  href=\"http:\/\/www.pinterest.com\/mauiandsons\"  title=\"Pinterest\"><i class=\"fa fa-pinterest\"><\/i><\/a><\/li>\n<li><a  href=\"https:\/\/www.instagram.com\/mauiandsons\/\"  title=\"Instagram\"><i class=\"fa fa-instagram\"><\/i><\/a><\/li>\n<li><a  href=\"https:\/\/www.youtube.com\/channel\/UCN5gOY_37MP7KJW-UiTSpOA\"  title=\"Youtube\"><i class=\"fa fa-youtube-play \"><\/i><\/a><\/li>",
     "footer_payment_title": "PAYMENT ACCEPT",
     "footer_payment_content": "<li> <a href=\"#\" title=\"\"> <i class=\"fa fa-cc-paypal\"><\/i> <\/a> <\/li> <li> <a href=\"#\" title=\"\"> <i class=\"fa fa-cc-visa\"><\/i> <\/a> <\/li> <li> <a href=\"#\" title=\"\">  <\/a> <\/li>",
@@ -80,12 +80,12 @@
     "footer_menu": "footer-1",
     "footer_coppyright": "Copyrights © 2017 Maui & Sons",
     "contact_content_des": "",
-    "contact_content_shop_info": "SHOP INFOMATION",
-    "contact_content_shop_info_des": "<dl class=\"dl-horizontal\">\n<dt>Address<\/dt>\n<dd>1415 Ocean Front Walk, Venice, CA 90291<\/dd>\n<dt>Email<\/dt>\n<dd>Email: info@mauiandsons.com<\/dd>\n<\/dl>",
+    "contact_content_shop_info": "CONTACT INFORMATION",
+    "contact_content_shop_info_des": "<dl class=\"dl-horizontal\">\n<dt>Address<\/dt>\n<dd>1415 Ocean Front Walk, Venice, CA 90291<\/dd>\n<dt>Email<\/dt>\n<dd>info (at) mauiandsons.com<\/dd>\n<\/dl>",
     "contact_content_stomer": "",
     "contact_content_customer_des": "<dl class=\"dl-horizontal\">\n<dt>M-F<\/dt>\n<dd>9 am to 6 pm<\/dd>\n<\/dl>",
-    "contact_form_title": "EMAIL TO US",
-    "contact_form_des": "Email: info@mauiandsons.com",
+    "contact_form_title": "",
+    "contact_form_des": "",
     "contact_map": false,
     "contact_map_1": "-37.849333",
     "contact_map_2": "144.962086",
@@ -1019,10 +1019,7 @@
     "show_frontpage_hero_text": "false",
     "shipping_tab": "frontpage",
     "footer_linklist": "footer",
-    "content_for_index": [
-
-    ]
+    "content_for_index": []
   },
-  "presets": {
-  }
+  "presets": {}
 }
