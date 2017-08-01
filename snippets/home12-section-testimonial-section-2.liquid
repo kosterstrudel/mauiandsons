@@ -1,0 +1,50 @@
+<a href="{{settings.testimonial2_url}}">
+<section>
+  <div class="home12-testimonial"  style="background-image: url({{'testimonial_background_2.jpg'| asset_url}});background-size: cover;" >
+  {% capture title %}testimonial_title_2{% endcapture %}
+  {% capture background %}testimonial_img_1_2.jpg{% endcapture %}
+  <div class="container">
+    <div class="padding-top-40 padding-bottom-400">
+      <div class="section-header center">
+        <h2 class="testimonial-header">{{settings[title]}}</h2>
+      </div><!-- /.section-header -->
+
+      <div class="section-customers " >
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  {% capture enable %}testimonial_1_2{{ i }}{% endcapture %}
+                  {% capture des %}testimonial_des_1_2{{ i }}{% endcapture %}
+                  {% capture name %}testimonial_name_1_2{{ i }}{% endcapture %}
+                  {% capture work %}testimonial_work_1_2{{ i }}{% endcapture %}
+                  {% capture img %}testimonial_img_1_2{% endcapture %}
+                  <div class="row">
+                    <div class="col-md-12  col-sm-12">
+                      <p>{{settings[des]}}</p>
+                    </div>
+                  </div><!-- /.center -->
+                </div>
+              </div>
+          </div>
+        </div>
+      </div><!-- /.section-content -->
+    </div>
+  </div><!-- /.container -->
+  </div>
+</section><!-- /section -->
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
