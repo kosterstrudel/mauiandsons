@@ -3,7 +3,7 @@ var bcSfFilterSettings = {
     general: {
         limit: bcSfFilterConfig.custom.current_page_size,
         /* Optional */
-        loadProductFirst: true, // Uncomment after completing the setup
+        loadProductFirst: true,
         sortingList: ['manual', 'price-ascending', 'price-descending', 'title-ascending', 'title-descending', 'created-descending', 'created-ascending', 'sale-descending'],
         showLimitList:"9,12,24,36"
     }
@@ -49,6 +49,7 @@ var bcSfFilterTemplate = {
                                           '<div class="product-category">' +
                                               '<span>{{itemType}}</span>' +
                                           '</div>' +
+  										  //'{{itemColorSwatch}}' +
                                           '<div class="product-price">' +
                                               '<span class="amout">' +
                                                   '{{itemPrice}}' +
@@ -248,14 +249,14 @@ BCSfFilter.prototype.buildProductGridItem = function(data) {
     }
     itemHtml = itemHtml.replace(/{{itemWishlist}}/g, itemWishlistHtml);
 
-  	//Add QuickView
+  	// Add QuickView
     var itemQuicViewHtml = '';
     itemQuicViewHtml += '<a href="javascript:void(0)" id="{{itemHandle}}" class="awe-button product-quick-view btn-quickview" data-toggle="tooltip" title="' + bcSfFilterConfig.label.product_quickview + '">';
     itemQuicViewHtml += '<i class="icon icon-eye"></i>';
     itemQuicViewHtml += '</a>';
     itemHtml = itemHtml.replace(/{{itemQuicView}}/g, itemQuicViewHtml);
 
-  	//Add Price
+  	// Add Price
     var price = this.formatMoney(data.price_min, this.moneyFormat);
     var price_varies = priceVaries ? (bcSfFilterConfig.label.from_html).replace(/{{ price }}/g, this.formatMoney(data.price_min, this.moneyFormat)) : price;
     var compare_at_price = onSale ? '<del class="sale-price">' + this.formatMoney(data.compare_at_price_min, this.moneyFormat) + '</del>' : '';
@@ -266,7 +267,51 @@ BCSfFilter.prototype.buildProductGridItem = function(data) {
     itemPriceHtml += '</span>';
 	itemHtml = itemHtml.replace(/{{itemPrice}}/g, itemPriceHtml);
 
-    /*** End Optional Elements ***/
+	// Add Color Swatch
+    var shopifyDomain = 'maui-sons';
+    var parsedOptionName = 'Color';
+    var itemColorSwatchHtml = '';
+    var optionIndex = data.options_with_values.findIndex(function(e) { return e.name == 'color'; });
+    var options = data.options_with_values.filter(function(e) { return (e.name).toLowerCase() == 'color'; });
+    if (typeof options[0] !== 'undefined') {
+        itemColorSwatchHtml += '<div class="col-swatch">';
+        itemColorSwatchHtml += '<ul data-option-index="' + optionIndex + '" class="color options">';
+        var values = '';
+        var count = 1;
+        for (var k in data.variants) {
+            var variant = data['variants'][k];
+            var value = variant['option_color'];
+            var wrapperValue = ',' + value + ',';
+            if (count <= 5 && values.indexOf(wrapperValue) == -1) {
+                var optionData = options[0]['values'].filter(function(e) { return e.title == value; });
+                var imageIndex = optionData[0]['image'];
+                var imageVariant = itemThumbUrl;
+                if (imageIndex !== null && typeof data['images'][imageIndex] !== 'undefined') {
+                    var imageVariant = this.optimizeImage(data['images'][imageIndex], 'grande');
+                }
+                var parsedSwatchName = value.replace(/\s/g, '-');
+                var colorUrl = 'https://s3-us-west-2.amazonaws.com/swatchify-static.sellerpanda.com/swatches/' + shopifyDomain + '/' + parsedOptionName + '/' + parsedSwatchName + '.png';
+                itemColorSwatchHtml += '<li data-option-title="' + value + '" data-href="' + imageVariant + '" class="color ' + this.slugify(value) + '">';
+                itemColorSwatchHtml += '<span style="background-size: cover; background-color: ' + value + '; background-position: center center; background-image: url(' + colorUrl + ')"></span>';
+                itemColorSwatchHtml += '</li>';
+                values += wrapperValue;
+                count ++;
+            }
+        }
+        itemColorSwatchHtml += '</ul>';
+        if (count > 5) {
+            itemColorSwatchHtml += '<label class="ps-have-more" data-src="{{itemUrl}}">More Available</label>';
+        }
+        itemColorSwatchHtml += '</div>';
+        itemColorSwatchHtml += '<script>' +
+                                    '$(\'#product-item-{{itemId}} .col-swatch li\').click(function(){' +
+                                        'var newImage = $(this).attr(\'data-href\');' +
+                                        '$(\'#product-item-{{itemId}}\').find(\'.grid-product__image\').attr({ src: newImage }); ' +
+                                        'return false;' +
+                                    '});' +
+                                '</script>';
+    }
+    itemHtml = itemHtml.replace(/{{itemColorSwatch}}/g, itemColorSwatchHtml);
 
     // Add main attribute (Always put at the end of this function)
     itemHtml = itemHtml.replace(/{{itemId}}/g, data.id);
