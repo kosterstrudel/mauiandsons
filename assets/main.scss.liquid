@@ -30,6 +30,12 @@ $main-color:{{settings.main_color}};
 $main-color:#ffa200;
 {%endif%}
 
+{%if settings.slide_2_button_color%}
+$btn-bg-color:{{settings.slide_2_button_color}};
+{%else%}
+$btn-bg-color:#000000;
+{%endif%}
+
 {%if settings.btn_color%}
 $btn-color:{{settings.btn_color}};
 {%else%}
@@ -9690,8 +9696,10 @@ main .main-slider .tp-bullets.preview3 .bullet.selected{
   height: 10px !important;
 }
 main .main-slider .tp-caption.rv-button{
-  background: $main-color!important;
-  border: 1px solid $main-color!important;
+  background: #00609c !important;
+  border: 1px solid #00609c !important;
+  padding-right:20px;
+  padding-left:20px;
   &.btn-white.btn-outline{
     background: none!important;
     border: 1px solid #333 !important;
