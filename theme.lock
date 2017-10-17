@@ -466,7 +466,7 @@ assets/main.js.liquid:
   production: 2017-07-12T01:07:39-07:00   d218e0eb85efcac0e7e61d1871bf4ada
 assets/main.scss.liquid:
   development: 2017-07-31T23:25:03-07:00
-  production: 2017-07-31T23:35:54-07:00   a3ab3c3aaa6709866c9e5246647d558c
+  production: 2017-10-16T12:20:00-07:00   9280adfdbd412c07a96b289f119fbddd
 assets/map.js:
   development: 2017-06-19T09:23:30-07:00
   production: 2017-07-12T01:07:18-07:00   d497197c26fed8c1225323d89c64d6fa
@@ -580,7 +580,7 @@ assets/slide1_image.jpg:
   production: 2017-07-19T00:23:20-07:00   a3e350628618cb017e3adc7a3f9dd3f2
 assets/slide2_image.jpg:
   development: 2017-07-11T21:37:51-07:00
-  production: 2017-07-12T01:07:19-07:00   40704b4780d4b60f67924cae3f12315a
+  production: 2017-09-21T00:28:15-07:00   09876a4f8cd2a5d6d58c6cd17801e9a9
 assets/slide3_image.jpg:
   development: 2017-06-16T08:08:45-07:00
   production: 2017-06-11T08:54:50-07:00   73598b7abf8427a899914fb286f8540e
@@ -679,13 +679,15 @@ assets/wishlist.js.liquid:
   production: 2017-07-12T01:06:17-07:00   ac6e138b50df6f670345722b05cb0a17
 config/settings_data.json:
   development: 2017-08-29T21:37:04-07:00   a1d54b90e0922265553ecf56f9fb1379
-  production: 2017-08-09T13:47:34-07:00   615b589387e0bad82efc19fae8c39a04
+  production: 2017-10-16T11:48:49-07:00   52dd39e4d292781bc084a2810de36dda
 config/settings_schema.json:
   development: 2017-08-29T21:35:19-07:00   09fe5d837759dee01bc03ed1d25620d6
-  production: 2017-07-31T23:35:17-07:00   d52e56269ac9e3176facb50d373d7b0a
+  production: 2017-08-29T21:41:40-07:00   09fe5d837759dee01bc03ed1d25620d6
 layout/theme.liquid:
   development: 2017-07-18T23:48:54-07:00
   production: 2017-08-09T13:30:41-07:00   a2a7ebe20c8375b58f442bfb7e7c0d11
+layout/theme.shogun.landing.liquid:
+  production: 2017-10-04T15:47:19-07:00   ceb28919431feae6e5587630db4f04cb
 locales/de.json:
   development: 2017-07-15T11:55:46-07:00
   production: 2017-07-15T12:00:19-07:00   44ed5e4376601af12c5bcdb726e73a0a
@@ -1115,6 +1117,8 @@ templates/page.liquid:
 templates/page.lookbook.liquid:
   development: 2017-06-19T09:23:13-07:00
   production: 2017-07-12T01:06:43-07:00   abfa16c87ffe13d9b1cf85eb58e8a74d
+templates/page.shogun.landing.liquid:
+  production: 2017-10-04T11:41:42-07:00   681f7acd299e6ad6584d9c307e6dfc19
 templates/page.wishlist.liquid:
   development: 2017-06-19T09:23:17-07:00
   production: 2017-07-12T01:06:45-07:00   0a29ac5c128ce330dcdb35fed610292b
